@@ -1,0 +1,976 @@
+/* ===== UofM COLOR PALETTE ===== */
+/* 
+Blue: #006eb5 (UofM Blue)
+Brown: #6b4423 (UofM Brown/Bison)
+Yellow: #ffb81c (UofM Gold)
+Light tan: #e8dcc8 (Light brown background)
+White: #ffffff (Content background)
+*/
+
+/* ===== GLOBAL RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8dcc8; /* Light tan/brown */
+    min-height: 100vh;
+    color: #333;
+}
+
+/* ===== MAIN CONTAINER - CSS GRID ===== */
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ===== HEADER - UofM Blue Background ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #006eb5; /* UofM Blue */
+    border-bottom: 3px solid #ffb81c; /* UofM Gold accent */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid #6b4423; /* Brown border */
+    padding: 10px 20px;
+    background: white;
+}
+
+.header-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.icon-link {
+    text-decoration: none;
+}
+
+.icon {
+    font-size: 1.75rem;
+    cursor: pointer;
+    filter: brightness(0) invert(1); /* Make emojis white on blue background */
+}
+
+/* ===== THEME TOGGLE SWITCH ===== */
+.theme-toggle {
+    display: inline-block;
+}
+
+.theme-switch-input {
+    display: none;
+}
+
+.theme-switch-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    height: 35px;
+    background: #ffb81c; /* UofM Gold */
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.theme-icon {
+    font-size: 1.25rem;
+    z-index: 2;
+}
+
+.theme-icon.sun {
+    opacity: 1;
+}
+
+.theme-icon.moon {
+    opacity: 0.3;
+}
+
+.theme-switch-input:checked + .theme-switch-label {
+    background: #6b4423; /* Brown when checked */
+}
+
+.theme-switch-input:checked + .theme-switch-label .sun {
+    opacity: 0.3;
+}
+
+.theme-switch-input:checked + .theme-switch-label .moon {
+    opacity: 1;
+}
+
+.theme-switch-label::before {
+    content: '';
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    background: white;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    transition: transform 0.3s;
+}
+
+.theme-switch-input:checked + .theme-switch-label::before {
+    transform: translateX(35px);
+}
+
+/* ===== PROFILE DROPDOWN ===== */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-icon {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    padding: 5px;
+    filter: brightness(0) invert(1); /* White on blue */
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: white;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    min-width: 150px;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.dropdown-item:hover {
+    background: #006eb5;
+    color: white;
+}
+
+/* ===== MAIN CONTENT - WHITE BACKGROUND ===== */
+.main-content {
+    background-color: #ffffff; /* White content area */
+    display: grid;
+    place-items: center;
+    padding: 60px 40px;
+    min-height: 500px;
+}
+
+/* ===== BUTTON GROUP ===== */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* ===== BUTTON ROW - Tooltip LEFT + Button RIGHT ===== */
+.button-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: center;
+}
+
+/* ===== TOOLTIPS ===== */
+.tooltip-left {
+    text-align: left;
+    padding: 20px 25px;
+    background: white;
+    border: 2px solid #006eb5; /* Blue border */
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    padding: 20px 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* ===== PRIMARY BUTTON - Questionnaire (BIGGER) ===== */
+.btn-primary {
+    background: #ffb81c; /* UofM Gold */
+    color: #333;
+    font-size: 1.5rem;
+    padding: 30px 70px;
+    border: 3px solid #006eb5; /* Blue border */
+}
+
+.btn-primary:hover {
+    background: #ffc838;
+}
+
+/* ===== SECONDARY BUTTONS - See Events & Add Event ===== */
+.btn-secondary {
+    background: #006eb5; /* UofM Blue */
+    color: white;
+    font-size: 1.125rem;
+    padding: 20px 50px;
+}
+
+.btn-secondary:hover {
+    background: #0081d5;
+}
+
+/* ===== FOOTER - LIGHT TAN BACKGROUND ===== */
+.footer {
+    background-color: #e8dcc8; /* Light tan (same as body) */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 40px;
+    gap: 10px;
+}
+
+.btn-past-events {
+    padding: 15px 30px;
+    background: #6b4423; /* Brown */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-past-events:hover {
+    background: #8b5a2b;
+}
+
+.footer-note {
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* ===== ADD EVENT PAGE ===== */
+.page-title {
+    text-align: center;
+    font-size: 2.25rem;
+    color: #006eb5; /* Blue title */
+    margin-bottom: 40px;
+}
+
+.form-container {
+    background: white;
+    padding: 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: white;
+    color: #333;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #006eb5; /* Blue focus */
+}
+
+.form-textarea {
+    min-height: 200px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.drag-drop-area {
+    border: 3px dashed #006eb5;
+    border-radius: 5px;
+    padding: 60px;
+    text-align: center;
+    background: #f9f9f9;
+    color: #999;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+
+.drag-drop-area:hover {
+    border-color: #ffb81c; /* Gold on hover */
+    background: #fffdf5;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background: #6b4423; /* Brown */
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #8b5a2b;
+}
+
+.btn-submit {
+    background: #ffb81c; /* Gold */
+    color: #333;
+    padding: 15px 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #ffc838;
+}
+
+/* ===== PAST EVENTS PAGE ===== */
+.events-list {
+    background: white;
+    padding: 30px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.event-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    color: #333;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+/* ===== QUESTIONNAIRE PAGES ===== */
+.questionnaire-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* ===== PROGRESS INDICATOR ===== */
+.progress-indicator {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.progress-circle {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #006eb5; /* Blue border */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #006eb5;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.progress-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Active circle (current question) */
+.progress-circle.active {
+    border-width: 4px;
+    border-color: #ffb81c; /* Gold border for current */
+    color: #ffb81c;
+    font-weight: bold;
+}
+
+/* Completed circle (answered questions) */
+.progress-circle.completed {
+    background: #b3d9ff; /* Light blue fill */
+    color: #006eb5;
+    border-color: #006eb5;
+}
+
+.progress-circle.completed:hover {
+    background: #99ccff;
+}
+
+.question-title {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.question-subtitle {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    font-style: italic;
+}
+
+/* ===== WORK SLIDER (Q4 - How Much Work) ===== */
+.work-slider-container {
+    background: #fff59d;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+.work-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.work-icon {
+    text-align: center;
+}
+
+.slider-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.work-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* ===== NAVIGATION BUTTONS ===== */
+.nav-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-nav {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.btn-previous {
+    background: #6b4423;
+    color: white;
+}
+
+.btn-previous:hover {
+    background: #8b5a2b;
+}
+
+.btn-next {
+    background: #6b4423;
+    color: white;
+}
+
+.btn-next:hover {
+    background: #8b5a2b;
+}
+
+/* ===== RESULTS PAGE ===== */
+.results-container {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.results-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.event-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-card {
+    background: #c8e6a0;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.event-card:hover {
+    background: #b8d690;
+    transform: translateX(5px);
+}
+
+.event-icon {
+    font-size: 2rem;
+}
+
+.event-name {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.map-container {
+    background: #f0f0f0;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-placeholder {
+    text-align: center;
+    color: #666;
+}
+
+.map-placeholder p {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.map-note {
+    font-size: 1rem;
+    color: #999;
+    font-style: italic;
+}
+
+.view-all-link {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.view-all-link a {
+    color: #006eb5;
+    font-size: 1.125rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.view-all-link a:hover {
+    color: #0081d5;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .main-content {
+        padding: 40px 20px;
+    }
+    
+    .button-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .tooltip-left {
+        order: 2;
+        text-align: center;
+    }
+    
+    .btn {
+        order: 1;
+        width: 100%;
+    }
+    
+    .btn-primary {
+        font-size: 1.25rem;
+        padding: 25px 50px;
+    }
+    
+    .btn-secondary {
+        font-size: 1rem;
+        padding: 18px 40px;
+    }
+    
+    .footer {
+        padding: 20px;
+    }
+    
+    /* Questionnaire mobile styles */
+    .progress-indicator {
+        gap: 10px;
+    }
+    
+    .progress-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+    
+    .progress-circle.active {
+        border-width: 3px;
+    }
+    
+    .sticky-options {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .sticky-note {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .other-times {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .tired-options {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .results-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .event-cards {
+        order: 2;
+    }
+    
+    .map-container {
+        order: 1;
+        min-height: 250px;
+    }
+    
+    .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-nav {
+        width: 100%;
+    }
+}
+
+/* ===== BUTTON ROW - Right-aligned button + Left-aligned tooltip ===== */
+.button-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+}
+
+/* ===== TOOLTIPS ===== */
+.tooltip-left {
+    text-align: left;
+    padding: 15px 20px;
+    background: white;
+    border: 2px solid #006eb5; /* Blue border */
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    padding: 20px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #6b4423; /* Brown */
+    color: white;
+}
+
+.btn:hover {
+    background: #8b5a2b;
+}
+
+/* ===== PRIMARY BUTTON - Questionnaire ===== */
+.btn-primary {
+    background: #ffb81c; /* UofM Gold */
+    color: #333;
+    font-size: 24px;
+    padding: 30px 60px;
+    border: 3px solid #006eb5; /* Blue border */
+}
+
+.btn-primary:hover {
+    background: #ffc838;
+}
+
+/* ===== SECONDARY BUTTONS ===== */
+.btn-secondary {
+    background: #006eb5; /* UofM Blue */
+    color: white;
+    font-size: 18px;
+    padding: 20px 40px;
+}
+
+.btn-secondary:hover {
+    background: #0081d5;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 40px;
+    gap: 10px;
+}
+
+.btn-past-events {
+    padding: 12px 24px;
+    background: #6b4423; /* Brown */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-past-events:hover {
+    background: #8b5a2b;
+}
+
+.footer-note {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+}
+
+/* ===== ADD EVENT PAGE ===== */
+.page-title {
+    text-align: center;
+    font-size: 36px;
+    color: #006eb5; /* Blue title */
+    margin-bottom: 40px;
+}
+
+.form-container {
+    background: white;
+    padding: 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #006eb5; /* Blue focus */
+}
+
+.form-textarea {
+    min-height: 200px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.drag-drop-area {
+    border: 3px dashed #006eb5;
+    border-radius: 5px;
+    padding: 60px;
+    text-align: center;
+    background: #f9f9f9;
+    color: #999;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.drag-drop-area:hover {
+    border-color: #ffb81c; /* Gold on hover */
+    background: #fffdf5;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background: #6b4423; /* Brown */
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #8b5a2b;
+}
+
+.btn-submit {
+    background: #ffb81c; /* Gold */
+    color: #333;
+    padding: 15px 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #ffc838;
+}
+
+/* ===== PAST EVENTS PAGE ===== */
+.events-list {
+    background: white;
+    padding: 30px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.event-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    color: #333;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .questionnaire-box {
+        padding: 40px 30px;
+    }
+    
+    .questionnaire-title {
+        font-size: 36px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .btn-action {
+        width: 100%;
+    }
+    
+    .button-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .tooltip-left {
+        order: 2;
+        text-align: center;
+    }
+    
+    .btn {
+        order: 1;
+        width: 100%;
+    }
+    
+    .btn-primary {
+        font-size: 20px;
+        padding: 25px 50px;
+    }
+}

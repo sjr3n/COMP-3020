@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Filler - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body> 
+    <div class="container">
+        <header class="header">
+            <div class="logo">Gap Filler</div>
+            <div class="header-icons">
+                <a href="index.html" class="icon-link" title="Home">
+                    <span class="icon">🏠</span>
+                </a>
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                    <label for="theme-switch" class="theme-switch-label">
+                        <span class="theme-icon sun">☀️</span>
+                        <span class="theme-icon moon">🌙</span>
+                    </label>
+                </div>
+                <div class="profile-dropdown">
+                    <button class="icon profile-icon" id="profileButton">
+                        👤
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="index.html" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="questionnaire-container">
+                
+                <div class="progress-indicator">
+                    <div class="progress-circle active" onclick="window.location.href='q1.html'">1</div>
+                    <div class="progress-circle" onclick="window.location.href='q2.html'">2</div>
+                    <div class="progress-circle" onclick="window.location.href='q3.html'">3</div>
+                    <div class="progress-circle" onclick="window.location.href='q4.html'">4</div>
+                </div>
+
+                <h1 class="question-title">How much school work do you have?</h1>
+
+                <div class="work-slider-container">
+                    <div class="work-icons">
+                        <!-- Don't mind this... just wanted to fill something in -->
+                        <span class="work-icon">🤤</span>
+                        <span class="work-icon">😅</span>
+                        <span class="work-icon">🫡</span>
+                        <span class="work-icon">🥲</span>
+                        <span class="work-icon">😭</span>
+                    </div>
+                    <div class="slider-scale">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                    </div>
+                    <input type="range" min="1" max="5" value="3" class="work-slider" id="workSlider">
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-nav btn-previous" onclick="window.location.href='q3.html'">
+                        Previous
+                    </button>
+                    <button class="btn-nav btn-next" onclick="window.location.href='allEvents.html'">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+
+        const themeSwitch = document.getElementById('theme-switch');
+        themeSwitch.addEventListener('change', function() {
+            console.log('Theme toggle clicked:', this.checked ? 'Dark' : 'Light');
+        });
+    </script>
+</body>
+</html>
