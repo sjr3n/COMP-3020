@@ -12,13 +12,19 @@ White: #ffffff (Content background)
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: #e8dcc8; /* Light tan/brown */
     min-height: 100vh;
     color: #333;
+}
+
+/* Ensure buttons and forms explicitly use the inherited font */
+.btn, .btn-nav, .btn-past-events, .form-input, .form-textarea {
+    font-family: inherit;
 }
 
 /* ===== MAIN CONTAINER - CSS GRID ===== */
