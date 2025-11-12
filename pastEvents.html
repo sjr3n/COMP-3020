@@ -5,8 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Past Events</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Past Events Table Styling */
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            color: #006eb5;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .events-table-container {
+            background: white;
+            padding: 30px;
+            border: 2px solid #006eb5;
+            border-radius: 5px;
+            max-width: 1000px;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        .events-table thead {
+            background-color: #006eb5;
+            color: white;
+        }
+
+        .events-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 3px solid #ffb81c;
+        }
+
+        .events-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        .events-table tbody tr:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
+
+        .events-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
 </head>
-<body>
+<body> 
     <div class="container">
         <header class="header">
             <div class="logo">Gap Filler</div>
@@ -35,37 +88,64 @@
         <main class="main-content">
             <h1 class="page-title">PAST EVENTS</h1>
             
-            <div class="events-list">
-                <div class="event-item">
-                    • Lunch - U of M - University Centre - 12:30PM - 10/04/2025
-                </div>
-                
-                <div class="event-item">
-                    • Chess Club - VW Social Club - 8:00PM - 10/02/2025
-                </div>
-                
-                <div class="event-item">
-                    • Chess Club - 230 University College - 4:00PM - 09/22/2025
-                </div>
-                
-                <div class="event-item">
-                    • Lunch - University Centre - 1:00PM - 09/19/2025
-                </div>
-                
-                <div class="event-item">
-                    • UMAnime Club - University Centre - 1:30PM - 09/17/2025
-                </div>
-                
-                <div class="event-item">
-                    • Sleep - Engineering Lounge - 12:30PM - 09/16/2025
-                </div>
-                
-                <div class="event-item">
-                    • Breakfast - Engineering Building - 8:00AM - 09/15/2025
-                </div>
+            <div class="events-table-container">
+                <table class="events-table">
+                    <thead>
+                        <tr>
+                            <th class="event-name-col">Event Name</th>
+                            <th class="event-location-col">Location</th>
+                            <th class="event-time-col">Time</th>
+                            <th class="event-date-col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="event-name-col">Lunch</td>
+                            <td class="event-location-col">University Centre</td>
+                            <td class="event-time-col">12:30 PM</td>
+                            <td class="event-date-col">10/04/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">Chess Club</td>
+                            <td class="event-location-col">VW Social Club</td>
+                            <td class="event-time-col">8:00 PM</td>
+                            <td class="event-date-col">10/02/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">Chess Club</td>
+                            <td class="event-location-col">230 University College</td>
+                            <td class="event-time-col">4:00 PM</td>
+                            <td class="event-date-col">09/22/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">Lunch</td>
+                            <td class="event-location-col">University Centre</td>
+                            <td class="event-time-col">1:00 PM</td>
+                            <td class="event-date-col">09/19/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">UMAnime Club</td>
+                            <td class="event-location-col">University Centre</td>
+                            <td class="event-time-col">1:30 PM</td>
+                            <td class="event-date-col">09/17/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">Sleep</td>
+                            <td class="event-location-col">Engineering Lounge</td>
+                            <td class="event-time-col">12:30 PM</td>
+                            <td class="event-date-col">09/16/2025</td>
+                        </tr>
+                        <tr>
+                            <td class="event-name-col">Breakfast</td>
+                            <td class="event-location-col">Engineering Building</td>
+                            <td class="event-time-col">8:00 AM</td>
+                            <td class="event-date-col">09/15/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div style="margin-top: 20px;">
+            <div class="back-button-container">
                 <button class="btn-secondary" onclick="window.location.href='index.html'">
                     Back to Home
                 </button>
@@ -75,5 +155,26 @@
         <footer class="footer">
         </footer>
     </div>
+
+    <script>
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+
+        const themeSwitch = document.getElementById('theme-switch');
+        themeSwitch.addEventListener('change', function() {
+            console.log('Theme toggle clicked:', this.checked ? 'Dark' : 'Light');
+        });
+    </script>
 </body>
 </html>
