@@ -9,60 +9,101 @@
   <style>
     .time-selection {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 20px;
-      justify-items: center;
-      align-content: center;
-      /* vertical centering inside grid */
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      background-color: white;
-      width: 600px;
-      height: 400px;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+      justify-items: stretch;
+      align-content: flex-start;
+      border: 1px solid #e0e0e0;
+      background: linear-gradient(135deg, #ffffff, #f7f9fb);
+      width: 650px;
+      min-height: 420px;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
 
     .time-slot {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
+      position: relative;
     }
 
-    .time-slot label {
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 0.9em;
-    }
-
+    /* Hide native radio */
     .time-slot input[type="radio"] {
-      appearance: none;
-      width: 28px;
-      height: 28px;
-      border: 2px solid #333;
-      border-radius: 50%;
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Pill look for all labels (including custom) */
+    .time-slot label {
+      display: block;
+      width: 100%;
+      padding: 10px 8px;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background-color: #ffffff;
+      border: 1px solid #d0d7de;
+      color: #333;
+      cursor: pointer;
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
+    }
+
+    .time-slot label:hover {
+      background-color: #f0f7ff;
+      border-color: #006eb5;
+      box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Selected pill (normal + custom) */
+    .time-slot input[type="radio"]:checked + label {
+      background-color: #006eb5;
+      color: #ffffff;
+      border-color: #005493;
+      box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Custom time row spans full width */
+    .custom-time-slot {
+      grid-column: 1 / -1;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    .custom-time-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .custom-time-slot select {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d0d7de;
+      background-color: #ffffff;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
-    .time-slot input[type="radio"]:checked {
-      background-color: #6b4423;
-      border: 3px solid #006eb5;
-      box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    }
-
-    /* Replicating this code for :hover option so that hovering over the selected option doesn't change it.*/
-    .time-slot input[type="radio"]:checked:hover {
-      background-color: #6b4423;
-      border: 3px solid #006eb5;
-      box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-    }
-
-
-    .time-slot input[type="radio"]:hover {
-      background-color: #ffb81c;
-      border: 3px solid #006eb5;
-      box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+    .custom-time-slot select:focus {
+      outline: none;
+      border-color: #006eb5;
+      box-shadow: 0 0 0 2px rgba(0, 110, 181, 0.2);
     }
 
     .nav-buttons {
@@ -172,6 +213,7 @@
         </div>
       </div>
     </main>
+
     <footer class="footer">
       <div class="footer-note">
         2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
@@ -180,28 +222,133 @@
   </div>
 
   <script>
-    // Generate 30-min intervals from 8:00 AM to 4:00 AM
-    const start = 8; // 8 AM
-    const end = 16; // 4 PM
     const container = document.getElementById("timeSelection");
 
-    for (let i = start * 60; i <= end * 60; i += 30) {
+    function toDisplayLabel(hours24, minutes) {
+      let displayHours = ((hours24 + 11) % 12) + 1;
+      let ampm = hours24 >= 12 ? "PM" : "AM";
+      return `${displayHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    }
+
+    // 8:00 AM to 5:30 PM in 30-minute steps
+    const startMinutes = 8 * 60;
+    const endMinutes = 17 * 60 + 30;
+
+    // Create standard time slots
+    for (let i = startMinutes; i <= endMinutes; i += 30) {
       let hours = Math.floor(i / 60);
       let minutes = i % 60;
-      let displayHours = ((hours + 11) % 12) + 1;
-      let ampm = hours >= 12 && hours < 24 ? "PM" : "AM";
-      if (hours >= 24) hours -= 24;
+      let label = toDisplayLabel(hours, minutes);
 
-      let label = `${displayHours}:${minutes
-        .toString()
-        .padStart(2, "0")} ${ampm}`;
       const div = document.createElement("div");
       div.className = "time-slot";
       div.innerHTML = `
-        <label for="time-${i}">${label}</label>
         <input type="radio" name="time" id="time-${i}" value="${label}">
+        <label for="time-${i}">${label}</label>
       `;
       container.appendChild(div);
+    }
+
+    // Custom time row at the bottom
+    const customDiv = document.createElement("div");
+    customDiv.className = "time-slot custom-time-slot";
+    customDiv.innerHTML = `
+      <input type="radio" name="time" id="time-custom" value="">
+      <label id="custom-time-pill" for="time-custom">Custom time</label>
+      <div class="custom-time-controls">
+        <select id="custom-hour">
+          ${Array.from({ length: 12 }, (_, i) => {
+            const h = i + 1;
+            return `<option value="${h}">${h}</option>`;
+          }).join("")}
+        </select>
+        <span>:</span>
+        <select id="custom-minute">
+          ${Array.from({ length: 60 }, (_, i) => {
+              const m = i.toString().padStart(2, "0");
+              return `<option value="${m}">${m}</option>`;
+          }).join("")}
+        </select>
+        <select id="custom-ampm">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    `;
+    container.appendChild(customDiv);
+
+    const customHour = customDiv.querySelector("#custom-hour");
+    const customMinute = customDiv.querySelector("#custom-minute");
+    const customAmpm = customDiv.querySelector("#custom-ampm");
+    const customTimeRadio = customDiv.querySelector("#time-custom");
+    const customTimePill = document.getElementById("custom-time-pill");
+    
+    function updateCustomTime() {
+      const hour = customHour.value;
+      const minute = customMinute.value;
+      const ampm = customAmpm.value;
+
+      if (!hour || !minute || !ampm) return;
+
+      const formattedMinute = minute.toString().padStart(2, "0");
+
+      const label = `${hour}:${formattedMinute} ${ampm}`;
+      customTimeRadio.value = label;
+
+      customTimePill.textContent = `Custom: ${label}`;
+
+      customTimeRadio.checked = true;
+      localStorage.setItem("selectedTime", label);
+    }
+
+
+    customHour.addEventListener("change", updateCustomTime);
+    customMinute.addEventListener("change", updateCustomTime);
+    customAmpm.addEventListener("change", updateCustomTime);
+
+    // Save selected time whenever any radio is clicked
+    container.addEventListener("change", function (e) {
+      if (e.target.name === "time") {
+        const value = e.target.value;
+
+        // If custom radio clicked without a full time set, ignore
+        if (e.target.id === "time-custom") {
+          const hour = customHour.value;
+          const minute = customMinute.value;
+          const ampm = customAmpm.value;
+          if (!hour || !minute || !ampm) {
+            e.target.checked = false;
+            return;
+          }
+        }
+
+        localStorage.setItem("selectedTime", value);
+      }
+    });
+
+    // Restore previously selected time from localStorage
+    const savedTime = localStorage.getItem("selectedTime");
+    if (savedTime) {
+      const radio = document.querySelector(
+        `input[name="time"][value="${savedTime}"]`
+      );
+
+      if (radio) {
+        radio.checked = true;
+      } else {
+        // Not one of the preset slots -> treat as custom
+        const match = savedTime.match(/^(\d{1,2}):(\d{2})\s(AM|PM)$/);
+        if (match) {
+          const [, hStr, mStr, ampmStr] = match;
+          const h = Math.min(Math.max(parseInt(hStr, 10), 1), 12);
+          customHour.value = h.toString();
+          customMinute.value = mStr;
+          customAmpm.value = ampmStr;
+        }
+        customTimeRadio.value = savedTime;
+        customTimeRadio.checked = true;
+        customTimePill.textContent = `Custom: ${savedTime}`;
+      }
     }
 
     // Dropdown menu logic
@@ -211,20 +358,6 @@
     profileButton.addEventListener("click", function (e) {
       e.stopPropagation();
       dropdownMenu.classList.toggle("show");
-    });
-
-    // Restore previously selected time from localStorage
-    const savedTime = localStorage.getItem("selectedTime");
-    if (savedTime) {
-      const radio = document.querySelector(`input[name="time"][value="${savedTime}"]`);
-      if (radio) radio.checked = true;
-    }
-
-    // Save selected time whenever a radio is clicked
-    container.addEventListener("change", function (e) {
-      if (e.target.name === "time") {
-        localStorage.setItem("selectedTime", e.target.value);
-      }
     });
 
     document.addEventListener("click", function (e) {
