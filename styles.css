@@ -30,6 +30,58 @@ body {
     /* makes the whole page fill the viewport */
 }
 
+/* Wrapper to enforce max width and centering */
+.homepage-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all child blocks (groups, divider) */
+    width: 100%;
+    max-width: 800px; /* Constrains the entire content block */
+}
+
+/* Primary Button Group (Questionnaire) */
+.primary-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the button/tooltip */
+    width: 100%;
+    gap: 20px;
+}
+
+/* Styling for the tooltip text on the homepage */
+.homepage-tooltip {
+    text-align: center !important; /* Forces the tooltip to center */
+    margin-bottom: 0;
+    width: 100%;
+}
+
+/* Secondary Button Container (See All, Add Event, Past Events) */
+.secondary-actions-container {
+    display: grid;
+    /* Arranges the 3 buttons in a 3-column layout */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+/* Style the horizontal divider */
+.section-separator {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto; /* Centers and adds spacing */
+    border: none;
+    border-top: 2px solid #ddd; 
+}
+
+/* Ensure secondary buttons are slightly smaller than the primary one */
+.btn-secondary {
+    font-size: 16px; 
+    padding: 15px 30px;
+    margin: 20px;
+    text-align: center;
+}
+
 /* ===== HEADER - UofM Blue Background ===== */
 .header {
     display: flex;
@@ -43,13 +95,13 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
-    border: 2px solid #6b4423;
-    /* Brown border */
-    padding: 10px 20px;
-    background: white;
+    color: white;
+    border: 6px solid var(--uom-gold);
+    padding: 1px 10px;
+    background: var(--uom-blue);
+    border-radius: 5px;
 }
 
 .header-icons {
@@ -117,7 +169,7 @@ body {
 }
 
 .footer-note {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
     font-style: italic;
 }
@@ -270,84 +322,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 200px);
-    /* leave space for header + footer */
     background-color: #ffffff;
-    /* White content area */
     padding: 30px 40px;
 }
-
-/* ===== BUTTON GROUP ===== */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    max-width: 900px;
-}
-
-/* ===== BUTTON ROW - Tooltip LEFT + Button RIGHT ===== */
-.button-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 30px;
-    align-items: center;
-}
-
-/* ===== TOOLTIPS ===== */
-.tooltip-left {
-    text-align: left;
-    padding: 20px 25px;
-    background: white;
-    border: 2px solid #006eb5;
-    /* Blue border */
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-}
-
-/* ===== BUTTONS ===== */
-.btn {
-    padding: 20px 50px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.125rem;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
-/* ===== PRIMARY BUTTON - Questionnaire (BIGGER) ===== */
-.btn-primary {
-    background: #ffb81c;
-    /* UofM Gold */
-    color: #333;
-    font-size: 1.5rem;
-    padding: 30px 70px;
-    border: 3px solid #006eb5;
-    /* Blue border */
-}
-
-.btn-primary:hover {
-    background: #ffc838;
-}
-
-/* ===== SECONDARY BUTTONS - See Events & Add Event ===== */
-.btn-secondary {
-    background: #006eb5;
-    /* UofM Blue */
-    color: white;
-    font-size: 1.125rem;
-    padding: 20px 50px;
-}
-
-.btn-secondary:hover {
-    background: #0081d5;
-}
-
 
 /* ===== PAST EVENTS PAGE ===== */
 .events-list {
@@ -369,7 +346,6 @@ body {
 .event-item:last-child {
     border-bottom: none;
 }
-
 
 .question-subtitle {
     font-size: 1rem;
@@ -772,13 +748,13 @@ body {
     background: #8b5a2b;
 }
 
-/* ===== PRIMARY BUTTON - Questionnaire ===== */
+/* ===== PRIMARY BUTTON ===== */
 .btn-primary {
     background: #ffb81c;
     /* UofM Gold */
     color: #333;
     font-size: 24px;
-    padding: 30px 60px;
+    padding: 45px 90px;
     border: 3px solid #006eb5;
     /* Blue border */
 }
