@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,14 +67,22 @@
         }
     </style>
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
-            <div class="logo">Gap Filler</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+            </ul>
+
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -92,6 +101,11 @@
             </div>
         </header>
 
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+        </div>
+
         <main class="main-content">
             <div class="questionnaire-container">
 
@@ -103,7 +117,7 @@
                 </div>
 
                 <h1 class="question-title">How tired are you feeling?</h1>
-                
+
                 <div class="tiredness-scale">
                     <div class="emoji-group">
                         <button class="emoji-btn" data-value="well_rested" title="Well Rested">😊</button>
@@ -133,10 +147,10 @@
                 </div>
             </div>
         </main>
-
-
         <footer class="footer">
-
+            <div class="footer-note">
+                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
+            </div>
         </footer>
     </div>
 
@@ -153,12 +167,12 @@
         }
 
         // Toggle dropdown menu
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
@@ -192,6 +206,18 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        function renderBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Questionnaire</span>`;
+            }
+        }
+        renderBreadcrumbs();
     </script>
 </body>
+
 </html>

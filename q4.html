@@ -1,19 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .work-slider-container {
+            background: white;
+            padding: 40px;
+            margin-top: 75px;
+            border-radius: 5px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            width: 600px;
+            height: 400px;
+        }
+
+        .work-icons {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            margin: 0 auto 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-icon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* show full image */
+            background-color: white;
+            /* optional — fills the empty space */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            border-radius: 10px;
+        }
+
+        .work-icon.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slider-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin: 0 10px 8px;
+        }
+
+        .work-slider {
+            width: 100%;
+        }
+    </style>
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
-            <div class="logo">Gap Filler</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+            </ul>
+
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -32,9 +93,14 @@
             </div>
         </header>
 
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+        </div>
+
         <main class="main-content">
             <div class="questionnaire-container">
-                
+
                 <div class="progress-indicator">
                     <div class="progress-circle" onclick="window.location.href='q1.html'">1</div>
                     <div class="progress-circle" onclick="window.location.href='q2.html'">2</div>
@@ -46,12 +112,11 @@
 
                 <div class="work-slider-container">
                     <div class="work-icons">
-                        <!-- Don't mind this... just wanted to fill something in -->
-                        <span class="work-icon">🤤</span>
-                        <span class="work-icon">😅</span>
-                        <span class="work-icon">🫡</span>
-                        <span class="work-icon">🥲</span>
-                        <span class="work-icon">😭</span>
+                        <img src="q4Photos/1.png" class="work-icon" alt="1">
+                        <img src="q4Photos/2.png" class="work-icon" alt="2">
+                        <img src="q4Photos/3.png" class="work-icon" alt="3">
+                        <img src="q4Photos/4.png" class="work-icon" alt="4">
+                        <img src="q4Photos/5.png" class="work-icon" alt="5">
                     </div>
                     <div class="slider-scale">
                         <span>1</span>
@@ -73,9 +138,10 @@
                 </div>
             </div>
         </main>
-
         <footer class="footer">
-
+            <div class="footer-note">
+                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
+            </div>
         </footer>
     </div>
 
@@ -83,12 +149,12 @@
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
@@ -111,6 +177,40 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        const slider = document.getElementById("workSlider");
+        const icons = document.querySelectorAll(".work-icon");
+
+        // --- Load saved slider value on page load ---
+        const savedValue = localStorage.getItem("workSliderValue");
+        if (savedValue) {
+            slider.value = savedValue;
+        }
+
+        function updateIcon() {
+            const value = parseInt(slider.value);
+            icons.forEach((icon, index) => {
+                icon.classList.toggle("active", index === value - 1);
+            });
+
+            // --- Save current slider value whenever it changes ---
+            localStorage.setItem("workSliderValue", value);
+        }
+
+        slider.addEventListener("input", updateIcon);
+        updateIcon(); // initialize the first visible icon
+
+        function renderBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Questionnaire</span>`;
+            }
+        }
+        renderBreadcrumbs();
     </script>
 </body>
+
 </html>

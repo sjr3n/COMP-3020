@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Past Events</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Past Events Table Styling */
-        .page-title {
-            text-align: center;
-            font-size: 36px;
-            color: #006eb5;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
         .events-table-container {
             background: white;
             padding: 30px;
@@ -59,14 +51,21 @@
         }
     </style>
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
-            <div class="logo">Gap Filler</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+            </ul>
+
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -85,87 +84,91 @@
             </div>
         </header>
 
-        <main class="main-content">
-            <h1 class="page-title">PAST EVENTS</h1>
-            
-            <div class="events-table-container">
-                <table class="events-table">
-                    <thead>
-                        <tr>
-                            <th class="event-name-col">Event Name</th>
-                            <th class="event-location-col">Location</th>
-                            <th class="event-time-col">Time</th>
-                            <th class="event-date-col">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="event-name-col">Lunch</td>
-                            <td class="event-location-col">University Centre</td>
-                            <td class="event-time-col">12:30 PM</td>
-                            <td class="event-date-col">10/04/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">Chess Club</td>
-                            <td class="event-location-col">VW Social Club</td>
-                            <td class="event-time-col">8:00 PM</td>
-                            <td class="event-date-col">10/02/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">Chess Club</td>
-                            <td class="event-location-col">230 University College</td>
-                            <td class="event-time-col">4:00 PM</td>
-                            <td class="event-date-col">09/22/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">Lunch</td>
-                            <td class="event-location-col">University Centre</td>
-                            <td class="event-time-col">1:00 PM</td>
-                            <td class="event-date-col">09/19/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">UMAnime Club</td>
-                            <td class="event-location-col">University Centre</td>
-                            <td class="event-time-col">1:30 PM</td>
-                            <td class="event-date-col">09/17/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">Sleep</td>
-                            <td class="event-location-col">Engineering Lounge</td>
-                            <td class="event-time-col">12:30 PM</td>
-                            <td class="event-date-col">09/16/2025</td>
-                        </tr>
-                        <tr>
-                            <td class="event-name-col">Breakfast</td>
-                            <td class="event-location-col">Engineering Building</td>
-                            <td class="event-time-col">8:00 AM</td>
-                            <td class="event-date-col">09/15/2025</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
             </div>
+        </div>
 
-            <div class="back-button-container">
-                <button class="btn-secondary" onclick="window.location.href='index.html'">
-                    Back to Home
-                </button>
-            </div>
-        </main>
+            <main class="main-content">
+                <h1 class="page-title">PAST EVENTS</h1>
+                <div class="events-table-container">
+                    <table class="events-table">
+                        <thead>
+                            <tr>
+                                <th class="event-name-col">Event Name</th>
+                                <th class="event-location-col">Location</th>
+                                <th class="event-time-col">Time</th>
+                                <th class="event-date-col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="event-name-col">Lunch</td>
+                                <td class="event-location-col">University Centre</td>
+                                <td class="event-time-col">12:30 PM</td>
+                                <td class="event-date-col">10/04/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Chess Club</td>
+                                <td class="event-location-col">VW Social Club</td>
+                                <td class="event-time-col">8:00 PM</td>
+                                <td class="event-date-col">10/02/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Gym Session</td>
+                                <td class="event-location-col">230 University College</td>
+                                <td class="event-time-col">2:00 PM</td>
+                                <td class="event-date-col">09/22/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Lunch</td>
+                                <td class="event-location-col">University Centre</td>
+                                <td class="event-time-col">1:00 PM</td>
+                                <td class="event-date-col">09/19/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Study over Lunch!</td>
+                                <td class="event-location-col">University Centre</td>
+                                <td class="event-time-col">1:30 PM</td>
+                                <td class="event-date-col">09/17/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Networking Workshop</td>
+                                <td class="event-location-col">Engineering Lounge</td>
+                                <td class="event-time-col">12:30 PM</td>
+                                <td class="event-date-col">09/16/2025</td>
+                            </tr>
+                            <tr>
+                                <td class="event-name-col">Free Breakfast</td>
+                                <td class="event-location-col">Engineering Building</td>
+                                <td class="event-time-col">8:00 AM</td>
+                                <td class="event-date-col">09/15/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <footer class="footer">
-        </footer>
+                <div class="back-button-container">
+                    <button class="btn-secondary" onclick="window.location.href='index.html'">
+                        Back to Home
+                    </button>
+                </div>
+            </main>
+
+            <footer class="footer">
+            </footer>
     </div>
 
     <script>
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
@@ -188,6 +191,18 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        function renderBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Past Events</span>`;
+            }
+        }
+        renderBreadcrumbs();
     </script>
 </body>
+
 </html>

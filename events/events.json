@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "Back To The Beat! UM Drum Circles: Fall 2025 Series",
+        "description": "Come connect with fellow students and experience the joy and power of drumming together while engaging in facilitated wellness-themed discussions and musical activities. All skill levels welcome — including beginners! Instruments will be provided. E-mail spiritualcare@umanitoba.ca to register.",
+        "time": "2025-11-12T12:00",
+        "place": "University Spiritual Care and Multi-Faith Centre (UMSU Room 521)",
+        "image": "event_images/event1.png",
+        "latitude": 49.8096,
+        "longitude": -97.1342,
+        "userSubmitted": false
+    },
+    {
+        "id": 2,
+        "title": "Gym Session",
+        "description": "Wanna get a quick work out in? Come get some exercise with me at the ALC!",
+        "time": "2025-11-12T12:00",
+        "place": "Active Living Centre (ALC)",
+        "image": "event_images/event2.png",
+        "latitude": 49.8064,
+        "longitude": -97.1385,
+        "userSubmitted": true
+    },
+    {
+        "id": 3,
+        "title": "Study Together",
+        "description": "A weekly workshop and study hall to build and practice study skills together in a co-working environment.",
+        "time": "2025-11-19T12:30",
+        "place": "UMSU Room 544",
+        "image": "event_images/event3.png",
+        "latitude": 49.8095,
+        "longitude": -97.1346,
+        "userSubmitted": false
+    },
+    {
+        "id": 4,
+        "title": "Drumming Circles with Kookum Karen",
+        "description": "Join in for drumming circles. Smudge will be available and ribbon skirts are optional. Open to all for learning drumming and songs.",
+        "time": "2025-11-21T14:00",
+        "place": "Bald Eagle Lodge (114 Sidney Smith St.)",
+        "image": "event_images/event4.jpg",
+        "latitude": 49.8083,
+        "longitude": -97.1376,
+        "userSubmitted": false
+    },
+    {
+        "id": 5,
+        "title": "Networking Workshop",
+        "description": "Attend this workshop to learn the benefits of networking, types of opportunities, and practice approaches with other workshop participants.",
+        "time": "2025-11-24T13:30",
+        "place": "UMSU Room 474",
+        "image": "event_images/event5.jpg",
+        "latitude": 49.8095,
+        "longitude": -97.1346,
+        "userSubmitted": false
+    },
+    {
+        "id": 6,
+        "title": "Study over Lunch!",
+        "description": "Come study with us over lunch! We'll be at the Belltower Cafe.",
+        "time": "2025-11-18T12:30",
+        "place": "St. Paul's College, lower level",
+        "image": "event_images/event6.png",
+        "latitude": 49.8103,
+        "longitude": -97.1379,
+        "userSubmitted": true
+    },
+    {
+        "id": 7,
+        "title": "Mental Health in the Classroom",
+        "description": "An interactive workshop to provide information on how to identify, respond to student mental health issues, and access resources.",
+        "time": "2025-12-10T09:00",
+        "place": "Room 223 - The Centre (65 Dafoe Road)",
+        "image": "event_images/event7.png",
+        "latitude": 49.8072,
+        "longitude": -97.1359,
+        "userSubmitted": false
+    },
+    {
+        "id": 8,
+        "title": "Learn to roll sushi!",
+        "description": "Love sushi but hate making it? Join us for a sushi rolling party at my dorm and learn the basics while making some new friends! Meet us outside the Pembina Hall Residence main entrance!",
+        "time": "2025-12-10T09:00",
+        "place": "Pembina Hall Residence",
+        "image": "event_images/event8.png",
+        "latitude": 49.8073,
+        "longitude": -97.1316,
+        "userSubmitted": true
+    }
+]

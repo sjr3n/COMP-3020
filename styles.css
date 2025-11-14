@@ -24,19 +24,78 @@ Dark Mode:
     box-sizing: border-box;
 }
 
+/* ===== Formatting for top left website logo (home button) ===== */
+.logo-link {
+    text-decoration: none; /* Removes the underline when not hovering */
+    cursor: pointer;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #e8dcc8; /* Light tan/brown */
+    background-color: #e8dcc8;
+    /* Light tan/brown */
     min-height: 100vh;
     color: #333;
 }
-
 
 /* ===== MAIN CONTAINER - CSS GRID ===== */
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* makes the whole page fill the viewport */
+    min-height: 100vh;
+    /* makes the whole page fill the viewport */
+}
+
+/* Wrapper to enforce max width and centering */
+.homepage-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all child blocks (groups, divider) */
+    width: 100%;
+    max-width: 800px; /* Constrains the entire content block */
+}
+
+/* Primary Button Group (Questionnaire) */
+.primary-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the button/tooltip */
+    width: 100%;
+    gap: 20px;
+}
+
+/* Styling for the tooltip text on the homepage */
+.homepage-tooltip {
+    text-align: center !important; /* Forces the tooltip to center */
+    margin-bottom: 0;
+    width: 100%;
+}
+
+/* Secondary Button Container (See All, Add Event, Past Events) */
+.secondary-actions-container {
+    display: grid;
+    /* Arranges the 3 buttons in a 3-column layout */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+/* Style the horizontal divider */
+.section-separator {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto; /* Centers and adds spacing */
+    border: none;
+    border-top: 2px solid #ddd; 
+}
+
+/* Ensure secondary buttons are slightly smaller than the primary one */
+.btn-secondary {
+    font-size: 16px; 
+    padding: 15px 30px;
+    margin: 20px;
+    text-align: center;
 }
 
 /* ===== HEADER - UofM Blue Background ===== */
@@ -45,17 +104,48 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #006eb5; /* UofM Blue */
-    border-bottom: 3px solid #ffb81c; /* UofM Gold accent */
+    background-color: #006eb5;
+    /* UofM Blue */
+    border-bottom: 3px solid #ffb81c;
+    /* UofM Gold accent */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 35px; 
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+.header-nav-item a {
+    color: rgba(255, 255, 255, 0.6); 
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.header-nav-item a:hover {
+    color: white;
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
-    border: 2px solid #6b4423; /* Brown border */
-    padding: 10px 20px;
-    background: white;
+    color: white;
+    border: 6px solid var(--uom-gold);
+    padding: 1px;
+    background: var(--uom-blue);
+    border-radius: 5px;
 }
 
 .header-icons {
@@ -71,19 +161,22 @@ body {
 .icon {
     font-size: 1.75rem;
     cursor: pointer;
-    filter: brightness(0) invert(1); /* Make emojis white on blue background */
+    filter: brightness(0) invert(1);
+    /* Make emojis white on blue background */
 }
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
-    flex: 1; /* allows footer to sit at bottom without overlap */
+    flex: 1;
+    /* allows footer to sit at bottom without overlap */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    background-color: white; /* ensure white background */
+    background-color: white;
+    /* ensure white background */
 }
 
 /* ===== FOOTER ===== */
@@ -96,14 +189,17 @@ body {
     justify-content: flex-start;
     padding: 20px 40px;
     gap: 10px;
-    height: 125px;           /* fixed footer height */
+    height: 125px;
+    /* fixed footer height */
     box-sizing: border-box;
-    overflow: hidden;        /* prevent growing beyond height */
+    overflow: hidden;
+    /* prevent growing beyond height */
 }
 
 .btn-past-events {
     padding: 12px 24px;
-    background: #6b4423; /* Brown */
+    background: #6b4423;
+    /* Brown */
     color: white;
     border: none;
     border-radius: 5px;
@@ -117,11 +213,51 @@ body {
 }
 
 .footer-note {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
     font-style: italic;
 }
 
+/* ===== BREADCRUMBS ===== */
+.breadcrumb-wrapper {
+    width: 100%;
+    background-color: white; 
+    height: 15px;
+}
+
+.breadcrumb-container {
+    position: absolute;
+    width: 100%;
+    max-width: 1700px;
+    top: 110px;
+    left: 30px;
+    text-align: left;
+    font-size: 0.95rem;
+    margin: 0 auto;
+}
+
+.breadcrumb-link {
+    color: var(--uom-blue); /* UofM Blue for links */
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #666;
+    content: ">";
+}
+
+.breadcrumb-current {
+    color: var(--uom-brown); /* UofM Brown/Bison for the current page */
+    font-size: 18px;
+    font-weight: bold;
+}
 
 /* ===== THEME TOGGLE SWITCH ===== */
 .theme-toggle {
@@ -138,7 +274,8 @@ body {
     justify-content: space-between;
     width: 70px;
     height: 35px;
-    background: #ffb81c; /* UofM Gold */
+    background: #ffb81c;
+    /* UofM Gold */
     border-radius: 50px;
     padding: 5px;
     cursor: pointer;
@@ -158,15 +295,16 @@ body {
     opacity: 0.3;
 }
 
-.theme-switch-input:checked + .theme-switch-label {
-    background: #6b4423; /* Brown when checked */
+.theme-switch-input:checked+.theme-switch-label {
+    background: #6b4423;
+    /* Brown when checked */
 }
 
-.theme-switch-input:checked + .theme-switch-label .sun {
+.theme-switch-input:checked+.theme-switch-label .sun {
     opacity: 0.3;
 }
 
-.theme-switch-input:checked + .theme-switch-label .moon {
+.theme-switch-input:checked+.theme-switch-label .moon {
     opacity: 1;
 }
 
@@ -182,7 +320,7 @@ body {
     transition: transform 0.3s;
 }
 
-.theme-switch-input:checked + .theme-switch-label::before {
+.theme-switch-input:checked+.theme-switch-label::before {
     transform: translateX(35px);
 }
 
@@ -198,7 +336,8 @@ body {
     font-size: 1.75rem;
     cursor: pointer;
     padding: 5px;
-    filter: brightness(0) invert(1); /* White on blue */
+    filter: brightness(0) invert(1);
+    /* White on blue */
 }
 
 .dropdown-menu {
@@ -231,22 +370,14 @@ body {
     color: white;
 }
 
-
-/* ===== BUTTON GROUP ===== */
-.button-group {
+/* ===== MAIN CONTENT - WHITE BACKGROUND ===== */
+.main-content {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    max-width: 900px;
-}
-
-/* ===== BUTTON ROW - Tooltip LEFT + Button RIGHT ===== */
-.button-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 30px;
+    justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 200px);
+    background-color: #ffffff;
+    padding: 40px 20px;
 }
 
 /* ===== TOOLTIPS ===== */
@@ -337,7 +468,6 @@ body {
     border-bottom: none;
 }
 
-
 .question-subtitle {
     font-size: 1rem;
     color: #666;
@@ -345,27 +475,33 @@ body {
     font-style: italic;
 }
 
-
 /* Container for the question box */
 .questionnaire-container {
-    position: relative; /* This makes the questionnaire
+    position: relative;
+    /* This makes the questionnaire
     the main reference point*/
-    width: 1100px;       /* fixed width */
-    height: 700px;      /* fixed height */
+    width: 1100px;
+    /* fixed width */
+    height: 700px;
+    /* fixed height */
     background-color: #f8f8f8;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 80px 40px 80px; /* space for content inside */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 80px 40px 80px;
+    /* space for content inside */
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* horizontal centering */
-    justify-content: center; /* vertical centering */
+    align-items: center;
+    /* horizontal centering */
+    justify-content: center;
+    /* vertical centering */
 }
 
-.question-title{
+.question-title {
     position: absolute;
-    top: 80px; /* distance from top of container */
+    top: 80px;
+    /* distance from top of container */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -375,7 +511,8 @@ body {
 /* Circles container (top navigation) */
 .progress-indicator {
     position: absolute;
-    top: 20px; /* distance from top of container */
+    top: 20px;
+    /* distance from top of container */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -399,13 +536,15 @@ body {
 
 .progress-circle.active {
     background-color: #6b4423;
-    border: 3px solid #006eb5; /* Blue border */
+    border: 3px solid #006eb5;
+    /* Blue border */
     color: white;
 }
 
 .progress-circle.active:hover {
     background-color: #6b4423;
-    border: 3px solid #006eb5; /* Blue border */
+    border: 3px solid #006eb5;
+    /* Blue border */
     color: white;
 }
 
@@ -436,7 +575,7 @@ body {
     font-size: 1rem;
     font-weight: bold;
     width: 120px;
-    
+
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -464,7 +603,7 @@ body {
     background: #fff59d;
     padding: 40px;
     border-radius: 5px;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     width: 100%;
 }
@@ -497,70 +636,119 @@ body {
     cursor: pointer;
 }
 
-
-/* ===== RESULTS PAGE ===== */
+/* ===== RESULTS PAGE (All Events) ===== */
 .results-container {
-    width: 100%;
-    max-width: 1000px;
+    max-width: 1500px;
+    /* Large container width */
+    min-width: 1000;
+    height: 1000px;
+    max-height: 1800;
+    padding: 20px 40px;
+    /* Padding inside the border */
+    background-color: #f8f8f8;
+    /* Light background */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #006eb5;
+    /* UofM Blue border for the wide rectangle */
 }
 
+/* Two-column layout for events and map */
 .results-layout {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    /* Use grid instead of flex for reliable column sizing */
+    grid-template-columns: minmax(550px, 1fr) 2fr;
+    /* Event list min 550px, Map gets 2 parts space */
     gap: 30px;
     margin-top: 30px;
+    height: calc(100% - 80px);
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
 }
 
+/* Scrollable Partition for Event Cards */
+.event-cards-scroll {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+/* The actual list of event tiles (2-column layout) */
 .event-cards {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    align-content: start;
     gap: 15px;
+    width: 100%;
 }
 
 .event-card {
-    background: #c8e6a0;
-    padding: 20px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    overflow: hidden;
 }
 
 .event-card:hover {
-    background: #b8d690;
-    transform: translateX(5px);
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.event-icon {
-    font-size: 2rem;
+/* 1. Event Image (Top Section) */
+.event-image {
+    width: 100%;
+    /* To maintain a square ratio (1:1) */
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+    /* Ensures the image covers the area */
 }
 
-.event-name {
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.map-container {
-    background: #f0f0f0;
-    border: 2px solid #006eb5;
-    border-radius: 5px;
-    min-height: 400px;
+/* 2. Small White Text Banner (Bottom Section) */
+.event-banner {
+    background: white;
+    padding: 10px 10px;
+    text-align: left;
+    height: 60px;
+    /* Fixed height for a uniform "small banner" */
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
 
-.map-placeholder {
-    text-align: center;
-    color: #666;
+.event-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.map-placeholder p {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.event-time {
+    font-size: 0.8rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Map Placeholder (Right Side) */
+.map-container {
+    background: #f0f0f0;
+    border: 2px solid #6b4423;
+    /* Brown border for contrast */
+    border-radius: 5px;
+    height: 100%;
+}
+
+#leaflet-event-map {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 }
 
 .map-note {
@@ -569,124 +757,79 @@ body {
     font-style: italic;
 }
 
+/* ===== EXPANDED EVENT VIEW ===== */
+.event-cards.expanded {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.event-card.expanded {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    background: #ffffff;
+    border: 3px solid #006eb5;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.event-card.expanded img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.event-card.expanded h2 {
+    font-size: 1.5rem;
+    color: #006eb5;
+    margin-bottom: 10px;
+}
+
+.event-card.expanded p {
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.back-button {
+    display: inline-block;
+    background: #006eb5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.back-button:hover {
+    background: #0081d5;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .view-all-link {
     margin-top: 30px;
     text-align: center;
-}
-
-.view-all-link a {
-    color: #006eb5;
-    font-size: 1.125rem;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.view-all-link a:hover {
-    color: #0081d5;
-    text-decoration: underline;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .header {
-        padding: 15px 20px;
-    }
-    
-    .main-content {
-        padding: 40px 20px;
-    }
-    
-    .button-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .tooltip-left {
-        order: 2;
-        text-align: center;
-    }
-    
-    .btn {
-        order: 1;
-        width: 100%;
-    }
-    
-    .btn-primary {
-        font-size: 1.25rem;
-        padding: 25px 50px;
-    }
-    
-    .btn-secondary {
-        font-size: 1rem;
-        padding: 18px 40px;
-    }
-    
-    .footer {
-        padding: 20px;
-    }
-    
-    /* Questionnaire mobile styles */
-    .progress-indicator {
-        gap: 10px;
-    }
-    
-    .progress-circle {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        border-width: 2px;
-    }
-    
-    .progress-circle.active {
-        border-width: 3px;
-    }
-    
-    .sticky-options {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .sticky-note {
-        width: 100%;
-        max-width: 250px;
-    }
-    
-    .time-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .other-times {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .tired-options {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .results-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .event-cards {
-        order: 2;
-    }
-    
-    .map-container {
-        order: 1;
-        min-height: 250px;
-    }
-    
-    .nav-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .btn-nav {
-        width: 100%;
-    }
 }
 
 /* ===== BUTTON ROW - Right-aligned button + Left-aligned tooltip ===== */
@@ -699,12 +842,13 @@ body {
 
 /* ===== TOOLTIPS ===== */
 .tooltip-left {
-    text-align: left;
-    padding: 15px 20px;
+    text-align: center;
+    padding: 15px;
     background: white;
-    border: 2px solid #006eb5; /* Blue border */
+    border: 2px solid #006eb5;
+    /* Blue border */
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
 }
 
@@ -716,7 +860,8 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    background: #6b4423; /* Brown */
+    background: #6b4423;
+    /* Brown */
     color: white;
 }
 
@@ -726,11 +871,13 @@ body {
 
 /* ===== PRIMARY BUTTON - Questionnaire ===== */
 .btn-primary {
-    background: #ffb81c; /* UofM Gold */
+    background: #ffb81c;
+    /* UofM Gold */
     color: #333;
     font-size: 24px;
-    padding: 30px 60px;
-    border: 3px solid #006eb5; /* Blue border */
+    padding: 45px 95px;
+    border: 3px solid #006eb5;
+    /* Blue border */
 }
 
 .btn-primary:hover {
@@ -739,7 +886,8 @@ body {
 
 /* ===== SECONDARY BUTTONS ===== */
 .btn-secondary {
-    background: #006eb5; /* UofM Blue */
+    background: #006eb5;
+    /* UofM Blue */
     color: white;
     font-size: 18px;
     padding: 20px 40px;
@@ -747,6 +895,114 @@ body {
 
 .btn-secondary:hover {
     background: #0081d5;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    width: 100%;
+    background-color: #e8dcc8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 40px;
+    gap: 10px;
+}
+
+/* ===== ADD EVENT PAGE ===== */
+.page-title {
+    text-align: center;
+    font-size: 44px;
+    color: #006eb5;
+    /* Blue title */
+    margin-bottom: 40px;
+}
+
+.form-container {
+    background: white;
+    padding: 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #006eb5;
+    /* Blue focus */
+}
+
+.form-textarea {
+    min-height: 200px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.drag-drop-area {
+    border: 3px dashed #006eb5;
+    border-radius: 5px;
+    padding: 60px;
+    text-align: center;
+    background: #f9f9f9;
+    color: #999;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.drag-drop-area:hover {
+    border-color: #ffb81c;
+    /* Gold on hover */
+    background: #fffdf5;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background: #6b4423;
+    /* Brown */
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #8b5a2b;
+}
+
+.btn-submit {
+    background: #ffb81c;
+    /* Gold */
+    color: #333;
+    padding: 15px 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #ffc838;
 }
 
 /* ===== PAST EVENTS PAGE ===== */
@@ -775,36 +1031,36 @@ body {
     .questionnaire-box {
         padding: 40px 30px;
     }
-    
+
     .questionnaire-title {
         font-size: 36px;
     }
-    
+
     .action-buttons {
         flex-direction: column;
         width: 100%;
         max-width: 300px;
     }
-    
+
     .btn-action {
         width: 100%;
     }
-    
+
     .button-row {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
+
     .tooltip-left {
         order: 2;
         text-align: center;
     }
-    
+
     .btn {
         order: 1;
         width: 100%;
     }
-    
+
     .btn-primary {
         font-size: 20px;
         padding: 25px 50px;
