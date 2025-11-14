@@ -14,6 +14,12 @@ White: #ffffff (Content background)
     box-sizing: border-box;
 }
 
+/* ===== Formatting for top left website logo (home button) ===== */
+.logo-link {
+    text-decoration: none; /* Removes the underline when not hovering */
+    cursor: pointer;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #e8dcc8;
@@ -94,12 +100,40 @@ body {
     /* UofM Gold accent */
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 35px; 
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+.header-nav-item a {
+    color: rgba(255, 255, 255, 0.6); 
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.header-nav-item a:hover {
+    color: white;
+}
+
 .logo {
     font-size: 2.5rem;
     font-weight: bold;
     color: white;
     border: 6px solid var(--uom-gold);
-    padding: 1px 10px;
+    padding: 1px;
     background: var(--uom-blue);
     border-radius: 5px;
 }
@@ -175,12 +209,21 @@ body {
 }
 
 /* ===== BREADCRUMBS ===== */
-.breadcrumb-container {
+.breadcrumb-wrapper {
     width: 100%;
-    max-width: 1700px; /* Should match max-width of .results-container */
-    padding: 0 40px 15px 40px; /* Padding for horizontal alignment and vertical spacing */
+    background-color: white; 
+    height: 15px;
+}
+
+.breadcrumb-container {
+    position: absolute;
+    width: 100%;
+    max-width: 1700px;
+    top: 110px;
+    left: 30px;
     text-align: left;
     font-size: 0.95rem;
+    margin: 0 auto;
 }
 
 .breadcrumb-link {
@@ -197,6 +240,7 @@ body {
 .breadcrumb-separator {
     margin: 0 8px;
     color: #666;
+    content: ">";
 }
 
 .breadcrumb-current {
@@ -323,7 +367,7 @@ body {
     align-items: center;
     min-height: calc(100vh - 200px);
     background-color: #ffffff;
-    padding: 30px 40px;
+    padding: 40px 20px;
 }
 
 /* ===== PAST EVENTS PAGE ===== */
@@ -353,7 +397,6 @@ body {
     text-align: center;
     font-style: italic;
 }
-
 
 /* Container for the question box */
 .questionnaire-container {
@@ -517,10 +560,10 @@ body {
 
 /* ===== RESULTS PAGE (All Events) ===== */
 .results-container {
-    max-width: 1700px;
+    max-width: 1500px;
     /* Large container width */
     min-width: 1000;
-    height: 1100px;
+    height: 1000px;
     max-height: 1800;
     padding: 20px 40px;
     /* Padding inside the border */
@@ -721,13 +764,13 @@ body {
 
 /* ===== TOOLTIPS ===== */
 .tooltip-left {
-    text-align: left;
-    padding: 15px 20px;
+    text-align: center;
+    padding: 15px;
     background: white;
     border: 2px solid #006eb5;
     /* Blue border */
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
 }
 
@@ -748,13 +791,13 @@ body {
     background: #8b5a2b;
 }
 
-/* ===== PRIMARY BUTTON ===== */
+/* ===== PRIMARY BUTTON - Questionnaire ===== */
 .btn-primary {
     background: #ffb81c;
     /* UofM Gold */
     color: #333;
     font-size: 24px;
-    padding: 45px 90px;
+    padding: 45px 95px;
     border: 3px solid #006eb5;
     /* Blue border */
 }

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gap Filler - Home</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Time slots grid — centered inside the box */
     .time-selection {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 20px;
-    justify-items: center;
-    align-content: center; /* vertical centering inside grid */
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    background-color: white;
-    width: 600px;
-    height: 400px;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      align-content: center;
+      /* vertical centering inside grid */
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      background-color: white;
+      width: 600px;
+      height: 400px;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
     }
 
     .time-slot {
@@ -101,21 +102,33 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header class="header">
-      <div class="logo">Gap Filler</div>
+      <a href="index.html" class="logo-link">
+        <div class="logo">Gap Filler</div>
+      </a>
+
+      <ul class="header-nav">
+        <li class="header-nav-item"><a href="index.html">Home</a></li>
+        <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+        <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+        <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+      </ul>
+
       <div class="header-icons">
-        <a href="index.html" class="icon-link" title="Home">🏠</a>
         <div class="theme-toggle">
-          <input type="checkbox" id="theme-switch" class="theme-switch-input" />
+          <input type="checkbox" id="theme-switch" class="theme-switch-input">
           <label for="theme-switch" class="theme-switch-label">
             <span class="theme-icon sun">☀️</span>
             <span class="theme-icon moon">🌙</span>
           </label>
         </div>
         <div class="profile-dropdown">
-          <button class="icon profile-icon" id="profileButton">👤</button>
+          <button class="icon profile-icon" id="profileButton">
+            👤
+          </button>
           <div class="dropdown-menu" id="dropdownMenu">
             <a href="index.html" class="dropdown-item">Logout</a>
           </div>
@@ -124,30 +137,21 @@
     </header>
 
     <main class="main-content">
+      <div class="breadcrumb-container" id="breadcrumbs">
+      </div>
+
       <div class="questionnaire-container">
         <div class="progress-indicator">
-          <div
-            class="progress-circle active"
-            onclick="window.location.href='q1.html'"
-          >
+          <div class="progress-circle active" onclick="window.location.href='q1.html'">
             1
           </div>
-          <div
-            class="progress-circle"
-            onclick="window.location.href='q2.html'"
-          >
+          <div class="progress-circle" onclick="window.location.href='q2.html'">
             2
           </div>
-          <div
-            class="progress-circle"
-            onclick="window.location.href='q3.html'"
-          >
+          <div class="progress-circle" onclick="window.location.href='q3.html'">
             3
           </div>
-          <div
-            class="progress-circle"
-            onclick="window.location.href='q4.html'"
-          >
+          <div class="progress-circle" onclick="window.location.href='q4.html'">
             4
           </div>
         </div>
@@ -159,28 +163,21 @@
         </form>
 
         <div class="nav-buttons">
-          <button
-            class="btn-nav btn-previous"
-            onclick="window.location.href='index.html'"
-          >
-            Previous
+          <button class="btn-nav btn-previous" onclick="window.location.href='index.html'">
+            Home
           </button>
-          <button
-            class="btn-nav btn-next"
-            onclick="window.location.href='q2.html'"
-          >
+          <button class="btn-nav btn-next" onclick="window.location.href='q2.html'">
             Next
           </button>
         </div>
       </div>
     </main>
     <footer class="footer">
-
+      <div class="footer-note">
+        2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
+      </div>
     </footer>
-
   </div>
-
-    
 
   <script>
     // Generate 30-min intervals from 8:00 AM to 4:00 AM
@@ -244,6 +241,18 @@
     themeSwitch.addEventListener("change", function () {
       console.log("Theme toggle clicked:", this.checked ? "Dark" : "Light");
     });
+
+    function renderBreadcrumbs() {
+      const breadcrumbs = document.getElementById('breadcrumbs');
+      if (breadcrumbs) {
+        breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Questionnaire</span>`;
+      }
+    }
+    renderBreadcrumbs();
   </script>
 </body>
+
 </html>
