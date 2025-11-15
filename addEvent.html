@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+        
     <style>
         .form-container {
             background: white;
@@ -115,6 +116,7 @@
             <ul class="header-nav">
                 <li class="header-nav-item"><a href="index.html">Home</a></li>
                 <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item nav-active"><a href="addEvent.html">Add Event</a></li>
                 <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
             </ul>
 
@@ -142,39 +144,39 @@
             </div>
         </div>
 
-            <main class="main-content">
-                <h1 class="page-title">ADD AN EVENT!</h1>
-                <div class="form-container">
-                    <form id="addEventForm">
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Enter Title" id="eventTitle">
-                        </div>
+        <main class="main-content">
+            <h1 class="page-title">ADD AN EVENT!</h1>
+            <div class="form-container">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Enter Title" id="eventTitle">
+                    </div>
 
-                        <div class="form-group">
-                            <div class="drag-drop-area" id="dropArea">
-                                Drag/Drop Image
-                            </div>
+                    <div class="form-group">
+                        <div class="drag-drop-area" id="dropArea">
+                            Drag/Drop Image
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <textarea class="form-input form-textarea" placeholder="Enter event description..."
-                                id="eventDescription"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <textarea class="form-input form-textarea" placeholder="Enter event description..."
+                            id="eventDescription"></textarea>
+                    </div>
 
-                        <div class="form-actions">
-                            <button type="button" class="btn-cancel" onclick="window.location.href='index.html'">
-                                CANCEL
-                            </button>
-                            <button type="submit" class="btn-submit">
-                                SUBMIT
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </main>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="window.location.href='index.html'">
+                            CANCEL
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            SUBMIT
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
 
-            <footer class="footer">
-            </footer>
+        <footer class="footer">
+        </footer>
     </div>
 
     <script>
@@ -201,7 +203,7 @@
             dropArea.textContent = 'Image uploaded! ✓';
             dropArea.style.color = '#667eea';
         });
-        
+
         // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
 
@@ -211,7 +213,7 @@
             themeSwitch.checked = true;
         }
 
-        themeSwitch.addEventListener('change', function() {
+        themeSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');

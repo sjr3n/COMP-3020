@@ -31,7 +31,7 @@ Dark Mode:
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
     background-color: #e8dcc8;
     /* Light tan/brown */
     min-height: 100vh;
@@ -125,8 +125,22 @@ body {
 }
 
 .header-nav-item a {
+    font-family: Arial, Helvetica, sans-serif;
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
+}
+
+.btn-text-link {
+    color: #006eb5; /* UofM Blue */
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.btn-text-link:hover {
+    color: #6b4423; /* UofM Brown/Bison on hover */
+    text-decoration: underline;
     font-size: 1.1rem;
     font-weight: bold;
     padding: 5px 0;
@@ -136,6 +150,21 @@ body {
 
 .header-nav-item a:hover {
     color: white;
+}
+
+/* Style for the link corresponding to the current page */
+.header-nav-item.nav-active a {
+    color: white !important;
+    font-weight: 700;
+    cursor: default;
+    opacity: 1;
+    border-bottom: 2px solid white;
+}
+
+/* Ensure active link doesn't change color or underline on hover */
+.header-nav-item.nav-active a:hover {
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .logo {
@@ -515,8 +544,6 @@ body {
 /* Container for the question box */
 .questionnaire-container {
     position: relative;
-    /* This makes the questionnaire
-    the main reference point*/
     width: 1100px;
     /* fixed width */
     height: 700px;
@@ -823,14 +850,11 @@ body {
 /* ===== RESULTS PAGE (All Events) ===== */
 .results-container {
     max-width: 1500px;
-    /* Large container width */
     min-width: 1000;
     height: 1000px;
     max-height: 1800;
     padding: 20px 40px;
-    /* Padding inside the border */
     background-color: #f8f8f8;
-    /* Light background */
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border: 3px solid #006eb5;
@@ -842,7 +866,6 @@ body {
     display: grid;
     /* Use grid instead of flex for reliable column sizing */
     grid-template-columns: minmax(550px, 1fr) 2fr;
-    /* Event list min 550px, Map gets 2 parts space */
     gap: 30px;
     margin-top: 30px;
     height: calc(100% - 80px);
@@ -852,6 +875,8 @@ body {
 
 /* Scrollable Partition for Event Cards */
 .event-cards-scroll {
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     background: white;
     border: 2px solid #006eb5;
@@ -928,6 +953,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 
 /* Map Placeholder (Right Side) */
 .map-container {
@@ -1624,7 +1650,7 @@ body.dark-mode .event-card.expanded {
 
 body.dark-mode .event-card.expanded .back-button {
     background-color: #4db8d8;
-    color: #0d2438;
+    color: #ffffff;
     border: 1px solid #4db8d8;
 }
 

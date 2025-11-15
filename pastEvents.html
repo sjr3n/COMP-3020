@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Past Events</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
     <style>
         .events-table-container {
             background: white;
@@ -16,6 +23,7 @@
             width: 100%;
             overflow-x: auto;
         }
+
         body.dark-mode .events-table-container {
             background: #1a3a52;
             border: 2px solid #FFC845;
@@ -67,6 +75,7 @@
                 <li class="header-nav-item"><a href="index.html">Home</a></li>
                 <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
                 <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item nav-active"><a href="pastEvents.html">View Past Events</a></li>
             </ul>
 
             <div class="header-icons">
@@ -93,27 +102,27 @@
             </div>
         </div>
 
-            <main class="main-content">
-                <h1 class="page-title">PAST EVENTS</h1>
-                <div class="events-table-container">
-                    <table class="events-table">
-                        <thead>
-                            <tr>
-                                <th class="event-name-col">Event Name</th>
-                                <th class="event-location-col">Location</th>
-                                <th class="event-time-col">Time</th>
-                                <th class="event-date-col">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tbody id="eventsTableBody">
-                        </tbody>
-                    </table>
-                </div>
-            </main>
+        <main class="main-content">
+            <h1 class="page-title">PAST EVENTS</h1>
+            <div class="events-table-container">
+                <table class="events-table">
+                    <thead>
+                        <tr>
+                            <th class="event-name-col">Event Name</th>
+                            <th class="event-location-col">Location</th>
+                            <th class="event-time-col">Time</th>
+                            <th class="event-date-col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tbody id="eventsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </main>
 
-            <footer class="footer">
-            </footer>
+        <footer class="footer">
+        </footer>
     </div>
 
     <div id="eventModal" class="modal">
@@ -137,7 +146,7 @@
                 "place": "University Centre",
                 "time": "2025-04-10T12:30:00",
                 "description": "A casual meet-up for lunch at the University Centre food court. Great way to catch up with friends or meet new people!",
-                "userSubmitted": false, 
+                "userSubmitted": false,
                 "image": null
             },
             {
@@ -146,7 +155,7 @@
                 "place": "VW Social Club",
                 "time": "2025-04-10T20:00:00",
                 "description": "Weekly chess club meeting. All skill levels welcome. We have boards and clocks ready. Bring your sharpest mind!",
-                "userSubmitted": true, 
+                "userSubmitted": true,
                 "image": null
             },
             {
@@ -170,7 +179,7 @@
             {
                 "id": 5,
                 "title": "Study over Lunch!",
-                "place": "University Centre", 
+                "place": "University Centre",
                 "time": "2025-09-17T13:30:00",
                 "description": "Bring your books and your lunch! We're dedicating this time to silent, focused study together.",
                 "userSubmitted": true,
@@ -203,7 +212,7 @@
             events.forEach(event => {
                 const row = document.createElement("tr");
                 row.dataset.eventId = event.id;
-                
+
                 row.innerHTML = `
                     <td class="event-name-col">${event.title}</td>
                     <td class="event-location-col">${event.place}</td>
@@ -254,7 +263,7 @@
             modalTime.textContent = new Date(event.time).toLocaleString();
             modalPlace.textContent = event.place;
             modalDescription.textContent = event.description;
-            modalImage.src = event.image || 'path/to/default/placeholder.png'; 
+            modalImage.src = event.image || 'path/to/default/placeholder.png';
             modalImage.alt = event.title;
             modalStatus.textContent = statusText;
             modalStatus.style.color = statusColor;
@@ -280,7 +289,7 @@
 
         // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
-        
+
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.body.classList.add('dark-mode');
@@ -290,7 +299,7 @@
             document.body.classList.remove('dark-mode');
             themeSwitch.checked = false;
         }
-        themeSwitch.addEventListener('change', function() {
+        themeSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');
@@ -310,7 +319,7 @@
             }
         }
         document.addEventListener("DOMContentLoaded", () => {
-            
+
             const eventTableBody = document.getElementById('eventsTableBody');
             const modal = document.getElementById('eventModal');
             const closeButton = document.querySelector('.close-button');
@@ -318,24 +327,24 @@
             renderEventsTable(pastEventData);
             renderBreadcrumbs();
 
-            eventTableBody.addEventListener('click', function(e) {
+            eventTableBody.addEventListener('click', function (e) {
                 let item = e.target.closest('tr');
-                
+
                 if (item && item.dataset.eventId) {
                     const eventId = parseInt(item.dataset.eventId);
                     const event = pastEventData.find(e => e.id === eventId);
-                    
+
                     if (event) {
                         showEventDetails(event);
                     }
                 }
             });
 
-            closeButton.onclick = function() {
+            closeButton.onclick = function () {
                 modal.style.display = 'none';
             }
 
-            window.onclick = function(event) {
+            window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = 'none';
                 }
