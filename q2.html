@@ -37,12 +37,12 @@
             display: flex;
             justify-content: center; /* horizontally center items */
             align-items: center;     /* vertically center items */
-            gap: 90px;
+            gap: 75px;
             border: 1px solid #ddd;
             background-color: white;
-            width: 600px;
+            width: 1025px;
             height: 400px;
-            padding: 10px;
+            padding: 0px;
             border-radius: 5px;
             box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
             margin: 0 auto; /* centers the whole box */
@@ -53,36 +53,38 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;        /* makes the border wrap around both items */
+            border: 2px solid black;
+            border-radius: 10px;  /* optional */
+            background: white;    /* optional */
         }
 
         .emoji-btn {
-            width: 100px;
-            height: 100px;
+            width: 225px; /* same as emoji-btn img*/
+            height: 225px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2.8rem;
-            background: none;
-            border: 3px solid transparent;
-            border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
             padding: 10px;
         }
 
         .emoji-btn img {
-        width: 165px;
-        height: auto;
-        object-fit: fill;
+            width: 175px;
+            height: auto;
+            object-fit: fill;
         }
 
         .emoji-btn:hover {
-            transform: scale(1.2);
+            transform: scale(1.10);
         }
 
         .emoji-btn.selected {
             border-color: #4a90e2;
             background-color: #eaf2ff;
+            transform: scale(1.10)
         }
 
         body.dark-mode .emoji-btn.selected {
@@ -92,7 +94,7 @@
 
         .emoji-label {
             color: black;
-            margin-top: 15px;
+            margin-top: 30px;
             font-weight: 500;
             font-size: 1rem;
         }

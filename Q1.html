@@ -56,7 +56,7 @@
       font-weight: 500;
       background-color: #ffffff;
       border: 1px solid #d0d7de;
-      color: #333;
+      color: #333 !important;
       cursor: pointer;
       transition:
         background-color 0.15s ease,
@@ -75,7 +75,7 @@
     /* Selected pill (normal + custom) */
     .time-slot input[type="radio"]:checked + label {
       background-color: #006eb5;
-      color: #ffffff;
+      color: black;
       border-color: #005493;
       box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
       transform: translateY(-1px);
@@ -148,6 +148,7 @@
     .dropdown-item:hover {
       background-color: #f0f0f0;
     }
+    
   </style>
 </head>
 
@@ -206,9 +207,9 @@
 
         <h1 class="question-title">When are you free?</h1>
 
-        <form id="timeForm">
-          <div class="time-selection" id="timeSelection"></div>
-        </form>
+          <form id="timeForm">
+            <div class="time-selection" id="timeSelection"></div>
+          </form>
 
         <div class="nav-buttons">
           <button class="btn-nav btn-previous" onclick="window.location.href='index.html'">

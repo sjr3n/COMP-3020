@@ -33,53 +33,65 @@
             margin-bottom: 20px;
         }
 
-        .tiredness-scale {
+        .social-scale {
             display: flex;
-            justify-content: center;
-            gap: 70px;
-            margin-top: 60px;
-            margin-bottom: 60px;
+            justify-content: center; /* horizontally center items */
+            align-items: center;     /* vertically center items */
+            gap: 40px;
+            border: 1px solid #ddd;
+            background-color: white;
+            width: 1025px;
+            height: 400px;
+            padding: 0px;
+            border-radius: 5px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+            margin: 0 auto; /* centers the whole box */
         }
 
         .emoji-group {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            padding: 20px;        /* makes the border wrap around both items */
+            border: 2px solid black;
+            border-radius: 10px;  /* optional */
+            background: white;    /* optional */
         }
+
 
         .emoji-btn {
             font-size: 2.8rem;
-            background: none;
-            border: 2px solid transparent;
-            border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
             padding: 10px;
         }
 
         .emoji-btn img{
-            width: 165px;
+            width: 150px;
             height: auto;
             object-fit: fill;
         }
 
         .emoji-btn:hover {
-            transform: scale(1.2);
+            transform: scale(1.10);
         }
 
         .emoji-btn.selected {
             border-color: #006eb5;
             background-color: #eaf2ff;
-            transform: scale(1.15);
+            transform: scale(1.10);
         }
 
         body.dark-mode .emoji-btn.selected {
             background-color: #2e4a5e;
             border-color: #FFC845;
+            transform: scale(1.10);
         }
 
         .emoji-label {
-            margin-top: 8px;
+            color: black;
+            margin-top: 35px;
             font-weight: 500;
             font-size: 1rem;
         }
@@ -136,7 +148,7 @@
 
                 <h1 class="question-title">How tired are you feeling?</h1>
 
-                <div class="tiredness-scale">
+                <div class="social-scale">
                     <div class="emoji-group">
                         <button class="emoji-btn" data-value="well_rested" title="Well Rested">
                             <img src="q3Photos/Well Rested.png" alt="Well Rested">
