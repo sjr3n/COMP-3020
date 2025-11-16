@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Home</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+        
     <style>
         /* How social are you feeling Q2*/
         .summary-container {
@@ -27,26 +35,45 @@
 
         .social-scale {
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 30px;
-            margin-bottom: 40px;
+            justify-content: center; /* horizontally center items */
+            align-items: center;     /* vertically center items */
+            gap: 90px;
+            border: 1px solid #ddd;
+            background-color: white;
+            width: 600px;
+            height: 400px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+            margin: 0 auto; /* centers the whole box */
         }
 
         .emoji-group {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
         }
 
         .emoji-btn {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 2.8rem;
             background: none;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
             padding: 10px;
+        }
+
+        .emoji-btn img {
+        width: 165px;
+        height: auto;
+        object-fit: fill;
         }
 
         .emoji-btn:hover {
@@ -58,21 +85,35 @@
             background-color: #eaf2ff;
         }
 
+        body.dark-mode .emoji-btn.selected {
+            background-color: #2e4a5e;
+            border-color: #FFC845;
+        }
+
         .emoji-label {
-            margin-top: 8px;
+            color: black;
+            margin-top: 15px;
             font-weight: 500;
             font-size: 1rem;
         }
     </style>
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
-            <div class="logo">Gap Filler</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+            </ul>
+
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -91,6 +132,11 @@
             </div>
         </header>
 
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+        </div>
+
         <main class="main-content">
             <div class="questionnaire-container">
 
@@ -102,18 +148,26 @@
                 </div>
 
                 <h1 class="question-title">How social are you feeling?</h1>
-                
+
                 <div class="social-scale">
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="not_social" title="Not social">😞</button>
+                        <button class="emoji-btn" data-value="not_social" title="Not social">
+                            <img src="q2Photos/Not Social.png" alt="Not Social">
+                        </button>
                         <div class="emoji-label">Not Social</div>
                     </div>
+
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="neutral" title="Neutral">😐</button>
+                        <button class="emoji-btn" data-value="neutral" title="Neutral">
+                            <img src="q2Photos/Neutral.png" alt="Neutral">
+                        </button>
                         <div class="emoji-label">Neutral</div>
                     </div>
+
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="social" title="Social">😄</button>
+                        <button class="emoji-btn" data-value="social" title="Social">
+                            <img src="q2Photos/Social.png" alt="Social">
+                        </button>
                         <div class="emoji-label">Social</div>
                     </div>
                 </div>
@@ -130,7 +184,9 @@
         </main>
 
         <footer class="footer">
-
+            <div class="footer-note">
+                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
+            </div>
         </footer>
     </div>
 
@@ -147,12 +203,12 @@
         }
 
         // Toggle dropdown menu
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
@@ -169,11 +225,39 @@
             });
         });
 
-        // Theme toggle (for future use)
+        // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        }
+        else {
+            document.body.classList.remove('dark-mode');
+            themeSwitch.checked = false;
+        }
         themeSwitch.addEventListener('change', function() {
-            console.log('Theme toggle clicked:', this.checked ? 'Dark' : 'Light');
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
         });
+
+        function renderBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Questionnaire</span>`;
+            }
+        }
+        renderBreadcrumbs();
     </script>
 </body>
+
 </html>

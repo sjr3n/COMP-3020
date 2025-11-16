@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Filler - Tailored Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+            </ul>
+
+            <div class="header-icons">
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-switch" class="theme-switch-input">
+                    <label for="theme-switch" class="theme-switch-label">
+                        <span class="theme-icon sun">☀️</span>
+                        <span class="theme-icon moon">🌙</span>
+                    </label>
+                </div>
+                <div class="profile-dropdown">
+                    <button class="icon profile-icon" id="profileButton">
+                        👤
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="index.html" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+        </div>
+
+        <main class="main-content">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+            <div class="results-container">
+                <h1 class="page-title">TAILORED EVENTS</h1>
+                <div class="results-layout">
+                    <div class="event-cards-scroll">
+                        <div class="event-cards"></div>
+                    </div>
+
+                    <div class="map-container">
+                        <div id="leaflet-event-map"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // --- Header scripts (unmodified) ---
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Toggle dropdown menu
+        profileButton.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+        // --- Events --- (Reduced from All Events list to simulate algorithm from questionnaire results)
+        const eventData = [
+            {
+                "id": 6,
+                "title": "Study over Lunch!",
+                "description": "Come study with us over lunch! We'll be at the Belltower Cafe.",
+                "time": "2025-11-25T12:00",
+                "place": "St. Paul's College, lower level",
+                "image": "events/event_images/event6.png",
+                "latitude": 49.8103,
+                "longitude": -97.1379,
+                "userSubmitted": true
+            },
+            {
+                "id": 7,
+                "title": "Mental Health in the Classroom",
+                "description": "An interactive workshop to provide information on how to identify, respond to student mental health issues, and access resources.",
+                "time": "2025-11-25T16:30",
+                "place": "Room 223 - The Centre (65 Dafoe Road)",
+                "image": "events/event_images/event7.png",
+                "latitude": 49.8072,
+                "longitude": -97.1359,
+                "userSubmitted": false
+            },
+            {
+                "id": 4,
+                "title": "Drumming Circles with Kookum Karen",
+                "description": "Join in for drumming circles. Smudge will be available and ribbon skirts are optional. Open to all for learning drumming and songs.",
+                "time": "2025-11-25T14:30",
+                "place": "Bald Eagle Lodge (114 Sidney Smith St.)",
+                "image": "events/event_images/event4.png",
+                "latitude": 49.8083,
+                "longitude": -97.1376,
+                "userSubmitted": false
+            },
+            {
+                "id": 2,
+                "title": "Gym Session",
+                "description": "Wanna get a quick work out in? Come get some exercise with me at the ALC!",
+                "time": "2025-11-25T13:00",
+                "place": "Active Living Centre (ALC)",
+                "image": "events/event_images/event2.png",
+                "latitude": 49.8064,
+                "longitude": -97.1385,
+                "userSubmitted": true
+            },
+            {
+                "id": 8,
+                "title": "Learn to roll sushi!",
+                "description": "Love sushi but hate making it? Join us for a sushi rolling party at my dorm and learn the basics while making some new friends! Meet us outside the Pembina Hall Residence main entrance!",
+                "time": "2025-11-25T18:00",
+                "place": "Pembina Hall Residence",
+                "image": "events/event_images/event8.png",
+                "latitude": 49.8073,
+                "longitude": -97.1316,
+                "userSubmitted": true
+            },
+            // --- All Events tile ---
+            {
+                "id": 999, // Unique ID for identification
+                "title": "Need More Options?",
+                "description": "Click here to view all available events, regardless of date or filter settings.",
+                "time": "2025-11-25T23:59",
+                "place": "Global Directory",
+                "image": "events/event_images/more_events.png",
+                "latitude": 0,
+                "longitude": 0,
+                "userSubmitted": false,
+                "isButton": true // CRITICAL: New flag to identify it as a button
+            }
+        ];
+
+        // Leaflet/Map Global Variables
+        let map;
+        let eventMarkerLayer;
+
+        function initLeafletMap() {
+            const lightLayerUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            const darkLayerUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+            const attribution = '&copy; OpenStreetMap, &copy; CARTO';
+
+            // Check if dark mode is currently active
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const initialTileUrl = isDarkMode ? darkLayerUrl : lightLayerUrl;
+
+            // Initialize map
+            map = L.map('leaflet-event-map').setView([49.8080, -97.1350], 15.5);
+
+            // Add the initial tile layer
+            L.tileLayer(initialTileUrl, {
+                maxZoom: 19,
+                attribution: attribution,
+                id: 'baseLayer' // Assign an ID to easily switch later
+            }).addTo(map);
+
+            eventMarkerLayer = L.layerGroup().addTo(map);
+        }
+
+        //Add pins for each event
+        function addMapPins(events) {
+            if (typeof eventMarkerLayer === 'undefined') return;
+            eventMarkerLayer.clearLayers();
+
+            events.forEach(event => {
+                if (event.latitude && event.longitude) {
+
+                    const markerOptions = {
+                        radius: 10,
+                        fillColor: "#ffb81c",
+                        strokeWeight: 20,
+                        color: "#000",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    };
+
+                    L.circleMarker([event.latitude, event.longitude], markerOptions)
+                        .bindPopup(`<b>${event.title}</b><br>${event.place}`)
+                        .addTo(eventMarkerLayer);
+                }
+            });
+        }
+
+        //Render grid of events
+        function renderEventGrid(events) {
+            showGridBreadcrumbs();
+            const cardsContainer = document.querySelector(".event-cards");
+            const eventCardsScroll = document.querySelector(".event-cards-scroll");
+
+            eventCardsScroll.classList.remove("expanded-view");
+            cardsContainer.classList.remove("expanded");
+            cardsContainer.style.gridTemplateColumns = "repeat(2, minmax(250px, 1fr))";
+            cardsContainer.innerHTML = "";
+
+            events.forEach(event => {
+                const card = document.createElement("div");
+                card.classList.add("event-card");
+                card.innerHTML = `
+                    <img src="${event.image}" alt="${event.title}" class="event-image">
+                        <div class="event-banner">
+                        <div class="event-name">${event.title}</div>
+                        <div class="event-time">
+                            ${event.isButton 
+                                ? '' : new Date(event.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                        </div>
+                    </div>`;
+
+                card.addEventListener("click", () => {
+                    if (event.isButton) {
+                        // If it's the dedicated button, redirect
+                        window.location.href = 'allEvents.html';
+                    } else {
+                        // Otherwise, proceed to expand the event normally
+                        expandEvent(event, events);
+                    }
+                });
+                cardsContainer.appendChild(card);
+            });
+
+            addMapPins(events);
+            if (map) {
+                map.setView([49.8080, -97.1350], 15.5);
+            }
+        }
+
+        //Expand an event
+        function expandEvent(event, allEvents) {
+            showExpandedBreadcrumbs(event.title);//Show expanded breadcrumbs
+            const cardsContainer = document.querySelector(".event-cards");
+            const eventCardsScroll = document.querySelector(".event-cards-scroll");
+
+            const isUserSubmitted = event.userSubmitted;
+            const statusText = isUserSubmitted ? "Community Event" : "Official Event";
+
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            let statusColor;
+
+            if (isUserSubmitted) {
+                statusColor = isDarkMode ? "#ff6961" : "red";
+            } else {
+                statusColor = isDarkMode ? "#4db8d8" : "#006eb5";
+            }
+            eventCardsScroll.classList.add("expanded-view");
+            cardsContainer.classList.add("expanded");
+            cardsContainer.style.gridTemplateColumns = "1fr";
+            cardsContainer.innerHTML = `
+                <div class="event-card expanded">
+                    <img src="${event.image}" alt="${event.title}"
+                    <h2>${event.title}</h2>
+                    <p class="event-expanded-status" style="color: ${statusColor}; font-size: 1.1rem; font-weight: bold;">
+                        ${statusText}
+                    </p>
+                    <p><strong>Time:</strong> ${new Date(event.time).toLocaleString()}</p>
+                    <p><strong>Place:</strong> ${event.place}</p>
+                    <p><strong>Description:</strong>
+                    <p>${event.description}</p>
+                    <button class="back-button">← Back to Events</button>
+                </div>`;
+
+            //Selecting an event on the map
+            if (map) {
+                map.flyTo([event.latitude, event.longitude], 17);
+                eventMarkerLayer.clearLayers();
+
+                const selectedMarkerOptions = {
+                    radius: 10,
+                    fillColor: "#ffb81c",
+                    color: "#000",
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 1
+                };
+
+                L.circleMarker([event.latitude, event.longitude], selectedMarkerOptions)
+                    .bindPopup(`<b>${event.title}</b>`).openPopup()
+                    .addTo(eventMarkerLayer);
+            }
+
+            cardsContainer.querySelector(".back-button").addEventListener("click", () => {
+                renderEventGrid(allEvents);
+            });
+        }
+
+        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                initLeafletMap();
+                renderEventGrid(eventData);
+            }, 50);
+        });
+
+
+
+        // Dark Mode Toggle and Map Tile Switching
+        const themeSwitch = document.getElementById('theme-switch');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        } else {
+            document.body.classList.remove('dark-mode');
+            themeSwitch.checked = false;
+        }
+
+        themeSwitch.addEventListener('change', function () {
+            const isDark = this.checked;
+            const lightLayerUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            const darkLayerUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
+
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+
+            // --- Map Switching ---
+            if (map) {
+                // Find and remove the current tile layer
+                map.eachLayer(function (layer) {
+                    if (layer.options.id === 'baseLayer') {
+                        map.removeLayer(layer);
+                    }
+                });
+                const newTileUrl = isDark ? darkLayerUrl : lightLayerUrl;
+                L.tileLayer(newTileUrl, {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap, &copy; CARTO',
+                    id: 'baseLayer'
+                }).addTo(map);
+            }
+        });
+
+        // --- Breadcrumb Helper Functions ---
+        function showGridBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Tailored Events</span>`;
+            }
+        }
+
+        function showExpandedBreadcrumbs(eventTitle) {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-link" onclick="renderEventGrid(eventData)">Tailored Events</span>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">${eventTitle}</span>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

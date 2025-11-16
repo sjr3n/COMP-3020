@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Home</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+        
     <style>
         /* How tired are you feeling Q3*/
         .summary-container {
@@ -49,6 +57,12 @@
             padding: 10px;
         }
 
+        .emoji-btn img{
+            width: 165px;
+            height: auto;
+            object-fit: fill;
+        }
+
         .emoji-btn:hover {
             transform: scale(1.2);
         }
@@ -59,6 +73,11 @@
             transform: scale(1.15);
         }
 
+        body.dark-mode .emoji-btn.selected {
+            background-color: #2e4a5e;
+            border-color: #FFC845;
+        }
+
         .emoji-label {
             margin-top: 8px;
             font-weight: 500;
@@ -66,14 +85,22 @@
         }
     </style>
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
-            <div class="logo">Gap Filler</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">Gap Filler</div>
+            </a>
+
+            <ul class="header-nav">
+                <li class="header-nav-item"><a href="index.html">Home</a></li>
+                <li class="header-nav-item"><a href="allEvents.html">All Events</a></li>
+                <li class="header-nav-item"><a href="addEvent.html">Add Event</a></li>
+                <li class="header-nav-item"><a href="pastEvents.html">View Past Events</a></li>
+            </ul>
+
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -92,6 +119,11 @@
             </div>
         </header>
 
+        <div class="breadcrumb-wrapper">
+            <div class="breadcrumb-container" id="breadcrumbs">
+            </div>
+        </div>
+
         <main class="main-content">
             <div class="questionnaire-container">
 
@@ -103,22 +135,30 @@
                 </div>
 
                 <h1 class="question-title">How tired are you feeling?</h1>
-                
+
                 <div class="tiredness-scale">
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="well_rested" title="Well Rested">😊</button>
+                        <button class="emoji-btn" data-value="well_rested" title="Well Rested">
+                            <img src="q3Photos/Well Rested.png" alt="Well Rested">
+                        </button>
                         <div class="emoji-label">Well Rested</div>
                     </div>
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="moderate" title="Moderate">😐</button>
-                        <div class="emoji-label">Moderate</div>
+                        <button class="emoji-btn" data-value="moderate" title="Alright">
+                            <img src="q3Photos/Alright.png" alt="Alright">
+                        </button>
+                        <div class="emoji-label">Alright</div>
                     </div>
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="tired" title="Tired">🥱</button>
+                        <button class="emoji-btn" data-value="tired" title="Tired">
+                            <img src="q3Photos/Tired.png" alt="Tired">
+                        </button>
                         <div class="emoji-label">Tired</div>
                     </div>
                     <div class="emoji-group">
-                        <button class="emoji-btn" data-value="exhausted" title="Exhausted">😴</button>
+                        <button class="emoji-btn" data-value="exhausted" title="Exhausted">
+                            <img src="q3Photos/Exhausted.png" alt="Exhausted">
+                        </button>
                         <div class="emoji-label">Exhausted</div>
                     </div>
                 </div>
@@ -133,10 +173,10 @@
                 </div>
             </div>
         </main>
-
-
         <footer class="footer">
-
+            <div class="footer-note">
+                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
+            </div>
         </footer>
     </div>
 
@@ -153,12 +193,12 @@
         }
 
         // Toggle dropdown menu
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
@@ -175,11 +215,39 @@
             });
         });
 
-        // Theme toggle
+        // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        }
+        else {
+            document.body.classList.remove('dark-mode');
+            themeSwitch.checked = false;
+        }
         themeSwitch.addEventListener('change', function() {
-            console.log('Theme toggle clicked:', this.checked ? 'Dark' : 'Light');
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
         });
+
+        function renderBreadcrumbs() {
+            const breadcrumbs = document.getElementById('breadcrumbs');
+            if (breadcrumbs) {
+                breadcrumbs.innerHTML = `
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current">Questionnaire</span>`;
+            }
+        }
+        renderBreadcrumbs();
     </script>
 </body>
+
 </html>

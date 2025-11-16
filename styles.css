@@ -1,10 +1,20 @@
 /* ===== UofM COLOR PALETTE ===== */
-/* 
+/*
+Light Mode:
 Blue: #006eb5 (UofM Blue)
 Brown: #6b4423 (UofM Brown/Bison)
 Yellow: #ffb81c (UofM Gold)
 Light tan: #e8dcc8 (Light brown background)
 White: #ffffff (Content background)
+
+Dark Mode:
+- Deep navy: #1a3a52 (darker version of UofM blue)
+- Navy blue: #0d2438
+- Blue-gray: #2e4a5e
+- Gold: #FFC845 (Actual UofM gold(?))
+- Light blue: #4db8d8 (UofM cyan, but a bit brighter for dark mode)
+- Brown: #6B4423 (UofM Brown/Bison)
+
 */
 
 /* ===== GLOBAL RESET & BASE STYLES ===== */
@@ -14,19 +24,78 @@ White: #ffffff (Content background)
     box-sizing: border-box;
 }
 
+/* ===== Formatting for top left website logo (home button) ===== */
+.logo-link {
+    text-decoration: none; /* Removes the underline when not hovering */
+    cursor: pointer;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e8dcc8; /* Light tan/brown */
+    font-family: "Inter", Arial, sans-serif;
+    background-color: #e8dcc8;
+    /* Light tan/brown */
     min-height: 100vh;
     color: #333;
 }
-
 
 /* ===== MAIN CONTAINER - CSS GRID ===== */
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* makes the whole page fill the viewport */
+    min-height: 100vh;
+    /* makes the whole page fill the viewport */
+}
+
+/* Wrapper to enforce max width and centering */
+.homepage-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all child blocks (groups, divider) */
+    width: 100%;
+    max-width: 800px; /* Constrains the entire content block */
+}
+
+/* Primary Button Group (Questionnaire) */
+.primary-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the button/tooltip */
+    width: 100%;
+    gap: 20px;
+}
+
+/* Styling for the tooltip text on the homepage */
+.homepage-tooltip {
+    text-align: center !important; /* Forces the tooltip to center */
+    margin-bottom: 0;
+    width: 100%;
+}
+
+/* Secondary Button Container (See All, Add Event, Past Events) */
+.secondary-actions-container {
+    display: grid;
+    /* Arranges the 3 buttons in a 3-column layout */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+/* Style the horizontal divider */
+.section-separator {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto; /* Centers and adds spacing */
+    border: none;
+    border-top: 2px solid #ddd;
+}
+
+/* Ensure secondary buttons are slightly smaller than the primary one */
+.btn-secondary {
+    font-size: 16px;
+    padding: 15px 30px;
+    margin: 20px;
+    text-align: center;
 }
 
 /* ===== HEADER - UofM Blue Background ===== */
@@ -35,17 +104,77 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #006eb5; /* UofM Blue */
-    border-bottom: 3px solid #ffb81c; /* UofM Gold accent */
+    background-color: #006eb5;
+    /* UofM Blue */
+    border-bottom: 3px solid #ffb81c;
+    /* UofM Gold accent */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 35px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+.header-nav-item a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+}
+
+.btn-text-link {
+    color: #006eb5; /* UofM Blue */
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.btn-text-link:hover {
+    color: #6b4423; /* UofM Brown/Bison on hover */
+    text-decoration: underline;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.header-nav-item a:hover {
+    color: white;
+}
+
+/* Style for the link corresponding to the current page */
+.header-nav-item.nav-active a {
+    color: white !important;
+    font-weight: 700;
+    cursor: default;
+    opacity: 1;
+    border-bottom: 2px solid white;
+}
+
+/* Ensure active link doesn't change color or underline on hover */
+.header-nav-item.nav-active a:hover {
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
-    border: 2px solid #6b4423; /* Brown border */
-    padding: 10px 20px;
-    background: white;
+    color: white;
+    border: 6px solid var(--uom-gold);
+    padding: 1px;
+    background: var(--uom-blue);
+    border-radius: 5px;
 }
 
 .header-icons {
@@ -61,19 +190,22 @@ body {
 .icon {
     font-size: 1.75rem;
     cursor: pointer;
-    filter: brightness(0) invert(1); /* Make emojis white on blue background */
+    filter: brightness(0) invert(1);
+    /* Make emojis white on blue background */
 }
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
-    flex: 1; /* allows footer to sit at bottom without overlap */
+    flex: 1;
+    /* allows footer to sit at bottom without overlap */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    background-color: white; /* ensure white background */
+    background-color: white;
+    /* ensure white background */
 }
 
 /* ===== FOOTER ===== */
@@ -86,14 +218,17 @@ body {
     justify-content: flex-start;
     padding: 20px 40px;
     gap: 10px;
-    height: 125px;           /* fixed footer height */
+    height: 125px;
+    /* fixed footer height */
     box-sizing: border-box;
-    overflow: hidden;        /* prevent growing beyond height */
+    overflow: hidden;
+    /* prevent growing beyond height */
 }
 
 .btn-past-events {
     padding: 12px 24px;
-    background: #6b4423; /* Brown */
+    background: #6b4423;
+    /* Brown */
     color: white;
     border: none;
     border-radius: 5px;
@@ -107,11 +242,51 @@ body {
 }
 
 .footer-note {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
     font-style: italic;
 }
 
+/* ===== BREADCRUMBS ===== */
+.breadcrumb-wrapper {
+    width: 100%;
+    background-color: white;
+    height: 15px;
+}
+
+.breadcrumb-container {
+    position: absolute;
+    width: 100%;
+    max-width: 1700px;
+    top: 110px;
+    left: 30px;
+    text-align: left;
+    font-size: 0.95rem;
+    margin: 0 auto;
+}
+
+.breadcrumb-link {
+    color: var(--uom-blue); /* UofM Blue for links */
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #666;
+    content: ">";
+}
+
+.breadcrumb-current {
+    color: var(--uom-brown); /* UofM Brown/Bison for the current page */
+    font-size: 18px;
+    font-weight: bold;
+}
 
 /* ===== THEME TOGGLE SWITCH ===== */
 .theme-toggle {
@@ -128,7 +303,8 @@ body {
     justify-content: space-between;
     width: 70px;
     height: 35px;
-    background: #ffb81c; /* UofM Gold */
+    background: #ffb81c;
+    /* UofM Gold */
     border-radius: 50px;
     padding: 5px;
     cursor: pointer;
@@ -148,15 +324,16 @@ body {
     opacity: 0.3;
 }
 
-.theme-switch-input:checked + .theme-switch-label {
-    background: #6b4423; /* Brown when checked */
+.theme-switch-input:checked+.theme-switch-label {
+    background: #6b4423;
+    /* Brown when checked */
 }
 
-.theme-switch-input:checked + .theme-switch-label .sun {
+.theme-switch-input:checked+.theme-switch-label .sun {
     opacity: 0.3;
 }
 
-.theme-switch-input:checked + .theme-switch-label .moon {
+.theme-switch-input:checked+.theme-switch-label .moon {
     opacity: 1;
 }
 
@@ -172,7 +349,7 @@ body {
     transition: transform 0.3s;
 }
 
-.theme-switch-input:checked + .theme-switch-label::before {
+.theme-switch-input:checked+.theme-switch-label::before {
     transform: translateX(35px);
 }
 
@@ -188,7 +365,8 @@ body {
     font-size: 1.75rem;
     cursor: pointer;
     padding: 5px;
-    filter: brightness(0) invert(1); /* White on blue */
+    filter: brightness(0) invert(1);
+    /* White on blue */
 }
 
 .dropdown-menu {
@@ -221,22 +399,14 @@ body {
     color: white;
 }
 
-
-/* ===== BUTTON GROUP ===== */
-.button-group {
+/* ===== MAIN CONTENT - WHITE BACKGROUND ===== */
+.main-content {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    max-width: 900px;
-}
-
-/* ===== BUTTON ROW - Tooltip LEFT + Button RIGHT ===== */
-.button-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 30px;
+    justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 200px);
+    background-color: #ffffff;
+    padding: 40px 20px;
 }
 
 /* ===== TOOLTIPS ===== */
@@ -290,6 +460,21 @@ body {
     background: #0081d5;
 }
 
+/* ===== TERTIARY(?) BUTTON - Past Event ===== */
+.btn-past-events {
+    padding: 15px 30px;
+    background: #6b4423;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-past-events:hover {
+    background: #8b5a2b;
+}
 
 /* ===== PAST EVENTS PAGE ===== */
 .events-list {
@@ -299,6 +484,43 @@ body {
     border-radius: 5px;
     max-width: 800px;
     width: 100%;
+}
+
+.events-table-container {
+    background: white;
+    padding: 30px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    max-width: 1000px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.events-table thead {
+    background-color: #006eb5;
+    color: white;
+}
+
+.events-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 3px solid #ffb81c;
+}
+
+.events-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.events-table tbody tr:hover {
+    background-color: #f0f8ff;
+    cursor: pointer;
+}
+
+.events-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .event-item {
@@ -312,7 +534,6 @@ body {
     border-bottom: none;
 }
 
-
 .question-subtitle {
     font-size: 1rem;
     color: #666;
@@ -320,27 +541,31 @@ body {
     font-style: italic;
 }
 
-
 /* Container for the question box */
 .questionnaire-container {
-    position: relative; /* This makes the questionnaire
-    the main reference point*/
-    width: 1100px;       /* fixed width */
-    height: 700px;      /* fixed height */
+    position: relative;
+    width: 1100px;
+    /* fixed width */
+    height: 700px;
+    /* fixed height */
     background-color: #f8f8f8;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 80px 40px 80px; /* space for content inside */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 80px 40px 80px;
+    /* space for content inside */
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* horizontal centering */
-    justify-content: center; /* vertical centering */
+    align-items: center;
+    /* horizontal centering */
+    justify-content: center;
+    /* vertical centering */
 }
 
-.question-title{
+.question-title {
     position: absolute;
-    top: 80px; /* distance from top of container */
+    top: 80px;
+    /* distance from top of container */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -350,7 +575,8 @@ body {
 /* Circles container (top navigation) */
 .progress-indicator {
     position: absolute;
-    top: 20px; /* distance from top of container */
+    top: 20px;
+    /* distance from top of container */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -374,18 +600,21 @@ body {
 
 .progress-circle.active {
     background-color: #6b4423;
-    border: 3px solid #006eb5; /* Blue border */
+    border: 3px solid #006eb5;
+    /* Blue border */
     color: white;
 }
 
 .progress-circle.active:hover {
     background-color: #6b4423;
-    border: 3px solid #006eb5; /* Blue border */
+    border: 3px solid #006eb5;
+    /* Blue border */
     color: white;
 }
 
 .progress-circle:hover {
     background-color: #ffb81c;
+    transform: scale(1.1);
 }
 
 
@@ -410,7 +639,7 @@ body {
     font-size: 1rem;
     font-weight: bold;
     width: 120px;
-    
+
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -432,13 +661,160 @@ body {
 .btn-next:hover {
     background: #ffb81c;
 }
+/*===== TIME SELECTOR (Q1 - When Are You Free) =====*/
+.time-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  justify-items: stretch;
+  align-content: flex-start;
+
+  /* Make it blend into the page */
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  width: 100%;
+  max-width: 650px;
+  padding: 0;
+  border-radius: 0;
+  margin: 12px 0 0;
+}
+
+/* Each time option becomes a pill-style card */
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Hide native radio, we’ll style the label instead */
+.time-slot input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pill look for unselected times */
+.time-slot label {
+  display: block;
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  color: #333;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+/* Hover state */
+.time-slot label:hover {
+  background-color: #f0f7ff;
+  border-color: #006eb5;
+  box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Selected pill */
+.time-slot input[type="radio"]:checked + label {
+  background-color: #006eb5;
+  color: #ffffff;
+  border-color: #005493;
+  box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Custom time row spanning full width */
+.custom-time-slot {
+  grid-column: 1 / -1;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.custom-time-slot label#custom-time-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.custom-time-slot .custom-time-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.custom-time-slot select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #d0d7de;
+  background-color: #ffffff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.custom-time-slot select:focus {
+  outline: none;
+  border-color: #006eb5;
+  box-shadow: 0 0 0 2px rgba(0, 110, 181, 0.2);
+}
+
+/* Custom time label styled like other pills */
+#custom-time-pill {
+  display: block;
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+/* Hover */
+#custom-time-pill:hover {
+  background-color: #f0f7ff;
+  border-color: #006eb5;
+  box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Selected highlight */
+#time-custom:checked + #custom-time-pill {
+  background-color: #006eb5;
+  color: #ffffff;
+  border-color: #005493;
+  box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
+  transform: translateY(-1px);
+}
 
 /* ===== WORK SLIDER (Q4 - How Much Work) ===== */
 .work-slider-container {
     background: #fff59d;
     padding: 40px;
     border-radius: 5px;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     width: 100%;
 }
@@ -471,70 +847,127 @@ body {
     cursor: pointer;
 }
 
-
-/* ===== RESULTS PAGE ===== */
+/* ===== RESULTS PAGE (All Events) ===== */
 .results-container {
-    width: 100%;
-    max-width: 1000px;
+    max-width: 1500px;
+    min-width: 1000;
+    height: 1000px;
+    max-height: 1800;
+    padding: 20px 40px;
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #006eb5;
+    /* UofM Blue border for the wide rectangle */
 }
 
+/* Two-column layout for events and map */
 .results-layout {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    /* Use grid instead of flex for reliable column sizing */
+    grid-template-columns: minmax(550px, 1fr) 2fr;
     gap: 30px;
     margin-top: 30px;
+    height: calc(100% - 80px);
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
 }
 
-.event-cards {
+/* Scrollable Partition for Event Cards */
+.event-cards-scroll {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    overflow-y: auto;
+    background: white;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    padding: 20px;
+    max-height: 800px;
+}
+
+.event-cards-scroll.expanded-view {
+    display: flex;
+    justify-content: center;
+    /* Center the single expanded card */
+}
+
+/* Grid for the events */
+.event-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    align-content: start;
+    gap: 20px;
+    width: 100%;
 }
 
 .event-card {
-    background: #c8e6a0;
-    padding: 20px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    overflow: hidden;
 }
 
 .event-card:hover {
-    background: #b8d690;
-    transform: translateX(5px);
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.event-icon {
-    font-size: 2rem;
+/* 1. Event Image (Top Section) */
+.event-image {
+    width: 100%;
+    /* To maintain a square ratio (1:1) */
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+    /* Ensures the image covers the area */
 }
 
-.event-name {
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.map-container {
-    background: #f0f0f0;
-    border: 2px solid #006eb5;
-    border-radius: 5px;
-    min-height: 400px;
+/* 2. Small White Text Banner (Bottom Section) */
+.event-banner {
+    background: white;
+    padding: 10px 10px;
+    text-align: left;
+    height: 60px;
+    /* Fixed height for a uniform "small banner" */
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
 
-.map-placeholder {
-    text-align: center;
-    color: #666;
+.event-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.map-placeholder p {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.event-time {
+    font-size: 0.8rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Map Placeholder (Right Side) */
+.map-container {
+    background: #f0f0f0;
+    border: 2px solid #6b4423;
+    /* Brown border for contrast */
+    border-radius: 5px;
+    height: 100%;
+}
+
+#leaflet-event-map {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
 }
 
 .map-note {
@@ -543,124 +976,148 @@ body {
     font-style: italic;
 }
 
-.view-all-link {
-    margin-top: 30px;
-    text-align: center;
+/* ===== EXPANDED EVENT VIEW ===== */
+.event-cards.expanded {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.view-all-link a {
+.event-card.expanded {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    background: #ffffff;
+    border: 3px solid #006eb5;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.event-card.expanded img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.event-card.expanded h2 {
+    font-size: 1.5rem;
     color: #006eb5;
-    font-size: 1.125rem;
+    margin-bottom: 10px;
+}
+
+.event-card.expanded p {
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.back-button {
+    display: inline-block;
+    background: #006eb5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
     font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.back-button:hover {
+    background: #0081d5;
+}
+
+/* ===== MODAL STYLES (Popup for Past Events) ===== */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000; /* Ensure it's on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    padding-top: 60px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 25px; /* Increased padding */
+    border: 3px solid #006eb5; /* UofM Blue border */
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Close button style */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #006eb5;
     text-decoration: none;
 }
 
-.view-all-link a:hover {
-    color: #0081d5;
-    text-decoration: underline;
+/* Event details inside the modal */
+.modal-event-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .header {
-        padding: 15px 20px;
+.modal-content h2 {
+    font-size: 1.5rem;
+    color: #006eb5;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 12px;
+    color: #333;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
     }
-    
-    .main-content {
-        padding: 40px 20px;
+
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
-    
-    .button-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .tooltip-left {
-        order: 2;
-        text-align: center;
-    }
-    
-    .btn {
-        order: 1;
-        width: 100%;
-    }
-    
-    .btn-primary {
-        font-size: 1.25rem;
-        padding: 25px 50px;
-    }
-    
-    .btn-secondary {
-        font-size: 1rem;
-        padding: 18px 40px;
-    }
-    
-    .footer {
-        padding: 20px;
-    }
-    
-    /* Questionnaire mobile styles */
-    .progress-indicator {
-        gap: 10px;
-    }
-    
-    .progress-circle {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        border-width: 2px;
-    }
-    
-    .progress-circle.active {
-        border-width: 3px;
-    }
-    
-    .sticky-options {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .sticky-note {
-        width: 100%;
-        max-width: 250px;
-    }
-    
-    .time-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .other-times {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .tired-options {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .results-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .event-cards {
-        order: 2;
-    }
-    
-    .map-container {
-        order: 1;
-        min-height: 250px;
-    }
-    
-    .nav-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .btn-nav {
-        width: 100%;
-    }
+}
+
+.view-all-link {
+    margin-top: 30px;
+    text-align: center;
 }
 
 /* ===== BUTTON ROW - Right-aligned button + Left-aligned tooltip ===== */
@@ -673,12 +1130,13 @@ body {
 
 /* ===== TOOLTIPS ===== */
 .tooltip-left {
-    text-align: left;
-    padding: 15px 20px;
+    text-align: center;
+    padding: 15px;
     background: white;
-    border: 2px solid #006eb5; /* Blue border */
+    border: 2px solid #006eb5;
+    /* Blue border */
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
 }
 
@@ -690,7 +1148,8 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    background: #6b4423; /* Brown */
+    background: #6b4423;
+    /* Brown */
     color: white;
 }
 
@@ -700,11 +1159,13 @@ body {
 
 /* ===== PRIMARY BUTTON - Questionnaire ===== */
 .btn-primary {
-    background: #ffb81c; /* UofM Gold */
+    background: #ffb81c;
+    /* UofM Gold */
     color: #333;
     font-size: 24px;
-    padding: 30px 60px;
-    border: 3px solid #006eb5; /* Blue border */
+    padding: 45px 95px;
+    border: 3px solid #006eb5;
+    /* Blue border */
 }
 
 .btn-primary:hover {
@@ -713,7 +1174,8 @@ body {
 
 /* ===== SECONDARY BUTTONS ===== */
 .btn-secondary {
-    background: #006eb5; /* UofM Blue */
+    background: #006eb5;
+    /* UofM Blue */
     color: white;
     font-size: 18px;
     padding: 20px 40px;
@@ -723,65 +1185,487 @@ body {
     background: #0081d5;
 }
 
-/* ===== PAST EVENTS PAGE ===== */
-.events-list {
+/* ===== FOOTER ===== */
+.footer {
+    width: 100%;
+    background-color: #e8dcc8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 40px;
+    gap: 10px;
+}
+
+/* ===== ADD EVENT PAGE ===== */
+.page-title {
+    text-align: center;
+    font-size: 44px;
+    color: #006eb5;
+    /* Blue title */
+    margin-bottom: 40px;
+}
+
+.form-container {
     background: white;
-    padding: 30px;
+    padding: 40px;
     border: 2px solid #006eb5;
     border-radius: 5px;
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
 }
 
-.event-item {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
     font-size: 16px;
+    background: white;
     color: #333;
 }
 
-.event-item:last-child {
-    border-bottom: none;
+.form-input:focus {
+    outline: none;
+    border-color: #006eb5;
+    /* Blue focus */
 }
+
+.form-textarea {
+    min-height: 200px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.drag-drop-area {
+    border: 3px dashed #006eb5;
+    border-radius: 5px;
+    padding: 60px;
+    text-align: center;
+    background: #f9f9f9;
+    color: #999;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.drag-drop-area:hover {
+    border-color: #ffb81c;
+    /* Gold on hover */
+    background: #fffdf5;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn-cancel {
+    background: #6b4423;
+    /* Brown */
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #8b5a2b;
+}
+
+.btn-submit {
+    background: #ffb81c;
+    /* Gold */
+    color: #333;
+    padding: 15px 40px;
+    border: 2px solid #006eb5;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #ffc838;
+}
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .questionnaire-box {
         padding: 40px 30px;
     }
-    
+
     .questionnaire-title {
         font-size: 36px;
     }
-    
+
     .action-buttons {
         flex-direction: column;
         width: 100%;
         max-width: 300px;
     }
-    
+
     .btn-action {
         width: 100%;
     }
-    
+
     .button-row {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
+
     .tooltip-left {
         order: 2;
         text-align: center;
     }
-    
+
     .btn {
         order: 1;
         width: 100%;
     }
-    
+
     .btn-primary {
         font-size: 20px;
         padding: 25px 50px;
     }
 }
 
+/* ===== DARK MODE ===== */
+body.dark-mode {
+    background-color: #1a3a52;
+    color: #ffffff;
+}
+
+body.dark-mode .header {
+    background-color: #0d2438;
+}
+
+body.dark-mode .logo {
+    background: #0d2438;
+    color: #ffffff;
+    border-color: #6B4423;
+}
+
+body.dark-mode .main-content {
+    background-color: #2e4a5e;
+    color: #ffffff;
+}
+
+body.dark-mode .footer {
+    background-color: #0d2438;
+}
+
+body.dark-mode .btn-primary {
+    background: #FFC845;
+    color: #2d2d30;
+    border-color: #003F87;
+}
+
+body.dark-mode .btn-secondary {
+    background: #4db8d8;
+    color: #ffffff;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #003F87;
+}
+
+body.dark-mode .btn-past-events {
+    background: #6B4423;
+}
+
+body.dark-mode .btn-past-events:hover {
+    background: #8b5a2b; 
+}
+
+body.dark-mode .btn-previous {
+    background: #6B4423;
+}
+
+body.dark-mode .btn-previous:hover {
+    background: #FFC845;
+}
+
+body.dark-mode .btn-next {
+    background: #6B4423;
+}
+
+body.dark-mode .btn-next:hover {
+    background: #FFC845;
+}
+
+body.dark-mode .progress-circle {
+    background: #2e4a5e;
+    border-color: #aaaaaa;
+    color: #ffffff;
+}
+
+body.dark-mode .progress-circle.active {
+    background: #6b4423; 
+    border-color: #FFC845;
+    color: #FFC845;
+}
+
+body.dark-mode .progress-circle.completed {
+    background: #003F87;
+    border-color: #FFC845;
+    color: #ffffff;
+}
+
+body.dark-mode .question-title,
+body.dark-mode .page-title {
+    color: #FFC845;
+}
+
+body.dark-mode .question-subtitle,
+body.dark-mode .footer-note {
+    color: #aaaaaa;
+}
+
+body.dark-mode .dropdown-menu {
+    background: #2e4a5e;
+    border-color: #003F87;
+}
+
+body.dark-mode .dropdown-item {
+    color: #ffffff;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: #6B4423;
+}
+
+body.dark-mode .questionnaire-container {
+    background-color: #1a3a52;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .time-selection {
+    background-color: #2e4a5e !important;
+    border: 1px solid #6B4423 !important;
+}
+
+body.dark-mode .time-slot label {
+    color: #ffffff !important;
+}
+
+body.dark-mode .time-slot input[type="radio"] {
+    border: 2px solid #ffffff !important;
+}
+
+body.dark-mode .time-slot input[type="radio"]:checked {
+    background-color: #FFC845 !important;
+    border: 3px solid #006eb5 !important;
+    box-shadow: 0 0 8px rgba(255, 200, 69, 0.8) !important;
+}
+
+body.dark-mode .time-slot input[type="radio"]:hover {
+    background-color: #6B4423 !important;
+    border: 3px solid #006eb5 !important;
+}
+
+body.dark-mode .results-container {
+    background-color: #1a3a52;
+    border: 3px solid #FFC845;
+    color: #ffffff;
+}
+
+body.dark-mode .event-name {
+    color: #FFC845;
+}
+
+body.dark-mode .event-time {
+    color: #aaaaaa;
+}
+
+body.dark-mode .form-container {
+    background: #1a3a52;
+    border-color: #FFC845;
+}
+
+body.dark-mode .form-input,
+body.dark-mode .form-textarea {
+    background: #2e4a5e;
+    border-color: #6b4423;
+    color: #ffffff;
+}
+
+body.dark-mode .form-input:focus,
+body.dark-mode .form-textarea:focus {
+    border-color: #4db8d8;
+}
+
+body.dark-mode .drag-drop-area {
+    border-color: #FFC845;
+    background: #1a3a52;
+    color: #aaaaaa;
+}
+
+body.dark-mode .events-table-container {
+    background: #1a3a52; 
+    border: 2px solid #FFC845;
+}
+
+body.dark-mode .events-table thead {
+    background-color: #0d2438;
+    color: #ffffff;
+}
+
+body.dark-mode .events-table th {
+    border-bottom: 3px solid #6B4423; 
+}
+
+body.dark-mode .events-table td {
+    color: #ffffff;
+    border-bottom: 1px solid #2e4a5e;
+}
+
+body.dark-mode .events-table tbody tr:hover {
+    background-color: #2e4a5e; 
+}
+
+body.dark-mode .modal-content {
+    background-color: #0d2438; 
+    border-color: #FFC845;
+    color: #ffffff;
+}
+
+body.dark-mode .close-button {
+    color: #ddd;
+}
+
+body.dark-mode .close-button:hover,
+body.dark-mode .close-button:focus {
+    color: #4db8d8;
+}
+
+body.dark-mode .event-card.expanded h2 {
+    color: #FFC845;
+}
+
+body.dark-mode .event-card.expanded p {
+    color: #ffffff;
+}
+
+body.dark-mode .back-button {
+    background: #FFC845;
+    color: #0d2438;
+}
+
+body.dark-mode .back-button:hover {
+    background: #ffb81c;
+}
+
+body.dark-mode .breadcrumb-wrapper {
+    background-color: #2e4a5e;
+}
+
+body.dark-mode .breadcrumb-container {
+    color: #ffffff;
+}
+body.dark-mode .breadcrumb-current {
+    color: #FFC845;
+}
+
+body.dark-mode .footer-note {
+    color: #aaaaaa;
+}
+body.dark-mode .event-card .event-name {
+    color: #ffffff;
+}
+body.dark-mode .event-card .event-time {
+    color: #aaaaaa;
+}
+
+body.dark-mode .tooltip-left {
+    background: #2e4a5e;
+    color: #ffffff; 
+    border-color: #4db8d8;
+}
+
+body.dark-mode .questionnaire-container {
+    background-color: #1a3a52;
+    color: #ffffff;
+}
+
+body.dark-mode .question-title {
+    color: #ffffff; 
+}
+
+body.dark-mode .question-subtitle {
+    color: #aaaaaa;
+}
+
+body.dark-mode .time-selection {
+    background-color: #2e4a5e;
+    border-color: #6B4423;
+}
+body.dark-mode .time-slot label {
+    color: #ffffff;
+}
+
+body.dark-mode .work-slider-container {
+    background: #2e4a5e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+}
+body.dark-mode .slider-scale {
+    color: #ffffff;
+}
+
+body.dark-mode .modal-content strong {
+    color: #ffffff;
+}
+
+body.dark-mode .modal-content p {
+    color: #ffffff;
+}
+
+body.dark-mode .results-container {
+    background-color: transparent;
+}
+
+body.dark-mode .event-cards-scroll {
+    background-color: #1a3a52;
+    border: 2px solid #FFC845;
+}
+
+body.dark-mode .event-card {
+    background-color: #2e4a5e;
+    color: #ffffff;
+    border: 1px solid #2e4a5e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .event-card.expanded {
+    background-color: #0d2438; 
+    color: #ffffff;
+    border: 1px solid #FFC845;
+}
+
+body.dark-mode .event-card.expanded .back-button {
+    background-color: #4db8d8;
+    color: #ffffff;
+    border: 1px solid #4db8d8;
+}
+
+body.dark-mode .event-card .event-banner {
+    background-color: #0d2438;
+    color: #ffffff;
+}
+
+body.dark-mode .event-card:hover {
+    background-color: #0d2438;
+    border: 1px solid #FFC845; 
+    box-shadow: 0 0 15px rgba(255, 200, 69, 0.5); 
+}
+
+
+body.dark-mode .event-card.expanded .back-button:hover {
+    background-color: #3aa6c9;
+}

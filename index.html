@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gap Filler - Home</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+        
 </head>
-<body> 
+
+<body>
     <div class="container">
         <header class="header">
             <div class="logo">Gap Filler</div>
             <div class="header-icons">
-                <a href="index.html" class="icon-link" title="Home">
-                    <span class="icon">🏠</span>
-                </a>
                 <div class="theme-toggle">
                     <input type="checkbox" id="theme-switch" class="theme-switch-input">
                     <label for="theme-switch" class="theme-switch-label">
@@ -32,36 +38,36 @@
             </div>
         </header>
 
+
         <main class="main-content">
-            <div class="button-group">
-                
-                <div class="button-row">
-                    <button class="btn btn-secondary" onclick="window.location.href='allEvents.html'">
-                        See all Events
+            <div class="homepage-content-wrapper">
+
+                <div class="primary-action-group">
+                    <div class="tooltip-left homepage-tooltip">
+                        Answer a few quick questions to find events tailored to your current needs and availability.
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='q1.html'" title="Start Questionnaire">
+                        START QUESTIONNAIRE
                     </button>
                 </div>
-
-                <div class="button-row">
-                    <button class="btn btn-primary" onclick="window.location.href='q1.html'">
-                        Questionnaire
+                <hr class="section-separator">
+                <div class="secondary-actions-container">
+                    <button class="btn btn-secondary" onclick="window.location.href='allEvents.html'" title="See All Events">
+                        See All Events
                     </button>
-                </div>
-
-                <div class="button-row">
-                    <button class="btn btn-secondary" onclick="window.location.href='addEvent.html'">
+                    <button class="btn btn-secondary" onclick="window.location.href='addEvent.html'" title="Add Event">
                         Add Event
                     </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='pastEvents.html'" title="View Past Events">
+                        View Past Events
+                    </button>
                 </div>
-
             </div>
         </main>
 
         <footer class="footer">
-            <button class="btn-past-events" onclick="window.location.href='pastEvents.html'">
-                Past Events
-            </button>
             <div class="footer-note">
-                Forgot where you've been? We got you covered!
+                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
             </div>
         </footer>
     </div>
@@ -70,21 +76,36 @@
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        profileButton.addEventListener('click', function(e) {
+        profileButton.addEventListener('click', function (e) {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
         });
-
+        
+        // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeSwitch.checked = true;
+        }
+
         themeSwitch.addEventListener('change', function() {
-            console.log('Theme toggle clicked:', this.checked ? 'Dark' : 'Light');
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
         });
     </script>
 </body>
+
 </html>
