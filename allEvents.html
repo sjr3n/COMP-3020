@@ -48,7 +48,7 @@
 
         <main class="main-content">
             <div class="results-container">
-                <h1 class="page-title">ALL EVENTS</h1>
+                <h1 class="page-title" id="pageTitle">ALL EVENTS</h1>
 
                 <div class="results-layout">
                     <div class="event-cards-scroll">
@@ -69,6 +69,13 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const isRecommendationMode = urlParams.get('recommendations') === 'true';
+
+        if (isRecommendationMode) {
+            document.getElementById('pageTitle').textContent = "RECOMMENDED EVENTS";
+        }
+
         // --- Header scripts (unmodified) ---
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
@@ -85,7 +92,7 @@
             }
         });
         // --- Events --- (Ended up hardcoding these in since it was annoying trying to get the JSON file to load!)
-        const eventData = [
+        const allEventData = [
             {
                 "id": 1,
                 "title": "Back To The Beat! UM Drum Circles",
@@ -175,6 +182,15 @@
                 "userSubmitted": true
             }
         ];
+
+        let eventData;
+        if (isRecommendationMode) {
+            // Show only 4 recommended events (IDs: 1, 4)
+            eventData = allEventData.filter(event => [1, 4].includes(event.id));
+        } else {
+            // Show all events
+            eventData = allEventData;
+        }
 
         // Leaflet/Map Global Variables
         let map;
@@ -344,22 +360,42 @@
         function showGridBreadcrumbs() {
             const breadcrumbs = document.getElementById('breadcrumbs');
             if (breadcrumbs) {
-                breadcrumbs.innerHTML = `
-            <a href="index.html" class="breadcrumb-link">Home</a>
-            <span class="breadcrumb-separator">></span>
-            <span class="breadcrumb-current">All Events</span>`;
+                if (isRecommendationMode) {
+                    breadcrumbs.innerHTML = `
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="q4.html" class="breadcrumb-link">Questionnaire</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Recommendations</span>`;
+                } else {
+                    breadcrumbs.innerHTML = `
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">All Events</span>`;
+                }
             }
         }
 
         function showExpandedBreadcrumbs(eventTitle) {
             const breadcrumbs = document.getElementById('breadcrumbs');
             if (breadcrumbs) {
-                breadcrumbs.innerHTML = `
-            <a href="index.html" class="breadcrumb-link">Home</a>
-            <span class="breadcrumb-separator">></span>
-            <span class="breadcrumb-link" onclick="renderEventGrid(eventData)">All Events</span>
-            <span class="breadcrumb-separator">></span>
-            <span class="breadcrumb-current">${eventTitle}</span>`;
+                if (isRecommendationMode) {
+                    breadcrumbs.innerHTML = `
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="q4.html" class="breadcrumb-link">Questionnaire</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-link" onclick="renderEventGrid(eventData)">Recommendations</span>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">${eventTitle}</span>`;
+                } else {
+                    breadcrumbs.innerHTML = `
+                <a href="index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-link" onclick="renderEventGrid(eventData)">All Events</span>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">${eventTitle}</span>`;
+                }
             }
         }
     </script>
