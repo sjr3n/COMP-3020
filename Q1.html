@@ -148,6 +148,48 @@
     .dropdown-item:hover {
       background-color: #f0f0f0;
     }
+
+    .time-wrapper {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+/* Right-side chosen times panel */
+.chosen-times {
+  margin-top: 13px;
+  width: 280px; /* change to whatever you want */
+  min-height: 420px; /* matches time-selection height */
+  border: 1px solid #d0d7de;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  font-family: inherit;
+}
+
+.chosen-times h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #333;
+}
+
+.selected-pill {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: #006eb5;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #005493;
+  transition: opacity 0.15s ease;
+}
+
+.selected-pill:hover {
+  opacity: 0.8;
+}
     
   </style>
 </head>
@@ -207,9 +249,17 @@
 
         <h1 class="question-title">When are you free?</h1>
 
-          <form id="timeForm">
-            <div class="time-selection" id="timeSelection"></div>
-          </form>
+          <div class="time-wrapper">
+            <form id="timeForm">
+              <div class="time-selection" id="timeSelection"></div>
+            </form>
+
+            <div class="chosen-times" id="chosenTimes">
+              <h3>Selected Times</h3>
+              <div id="chosenList"></div>
+            </div>
+          </div>
+
 
         <div class="nav-buttons">
           <button class="btn-nav btn-previous" onclick="window.location.href='index.html'">
@@ -255,6 +305,11 @@
         <label for="time-${i}">${label}</label>
       `;
       container.appendChild(div);
+    }
+
+    function timeToMinutes(t) {
+    const [h, m] = t.split(":").map(Number);
+    return h * 60 + m;
     }
 
     // Custom time row at the bottom
@@ -306,58 +361,12 @@
       customTimePill.textContent = `Custom: ${label}`;
 
       customTimeRadio.checked = true;
-      localStorage.setItem("selectedTime", label);
     }
 
 
     customHour.addEventListener("change", updateCustomTime);
     customMinute.addEventListener("change", updateCustomTime);
     customAmpm.addEventListener("change", updateCustomTime);
-
-    // Save selected time whenever any radio is clicked
-    container.addEventListener("change", function (e) {
-      if (e.target.name === "time") {
-        const value = e.target.value;
-
-        // If custom radio clicked without a full time set, ignore
-        if (e.target.id === "time-custom") {
-          const hour = customHour.value;
-          const minute = customMinute.value;
-          const ampm = customAmpm.value;
-          if (!hour || !minute || !ampm) {
-            e.target.checked = false;
-            return;
-          }
-        }
-
-        localStorage.setItem("selectedTime", value);
-      }
-    });
-
-    // Restore previously selected time from localStorage
-    const savedTime = localStorage.getItem("selectedTime");
-    if (savedTime) {
-      const radio = document.querySelector(
-        `input[name="time"][value="${savedTime}"]`
-      );
-
-      if (radio) {
-        radio.checked = true;
-      } else {
-        // Not one of the preset slots -> treat as custom
-        const match = savedTime.match(/^(\d{1,2}):(\d{2})\s(AM|PM)$/);
-        if (match) {
-          const [, hStr, mStr, ampmStr] = match;
-          const h = Math.min(Math.max(parseInt(hStr, 10), 1), 12);
-          customHour.value = h.toString();
-          customMinute.value = mStr;
-          customAmpm.value = ampmStr;
-        }
-        customTimeRadio.value = savedTime;
-        customTimeRadio.checked = true;
-        customTimePill.textContent = `Custom: ${savedTime}`;
-      }
-    }
 
     // Dropdown menu logic
     const profileButton = document.getElementById("profileButton");
@@ -409,6 +418,201 @@
       }
     }
     renderBreadcrumbs();
+
+//---------------------------------------------------------------
+// MOVE SELECTED TIMES FROM LEFT → RIGHT
+// RESTORE THEM WHEN CLICKED FROM RIGHT → LEFT
+// LIMIT = 4 SELECTIONS
+//---------------------------------------------------------------
+
+const chosenList = document.getElementById("chosenList");
+const timeSelection = document.getElementById("timeSelection");
+
+// Store original ordering with index position
+let originalOrder = new Map(); // id → index
+
+// keep track of original times
+let allTimes = new Map(); // id → { elementHTML, minutes }
+
+
+// Record original index positions
+function cacheOriginalPositions() {
+  const slots = Array.from(document.querySelectorAll(".time-slot input"));
+  slots.forEach((radio, index) => {
+    originalOrder.set(radio.id, index);
+  });
+}
+
+// ---- Selection Limit ----
+function selectedCount() {
+  return chosenList.querySelectorAll(".selected-pill").length;
+}
+
+// Listen for selecting a time in the left column
+timeSelection.addEventListener("change", e => {
+  if (e.target.name !== "time") return;
+
+  if (selectedCount() >= 4) {
+    // limit reached → block selection
+    e.target.checked = false;
+
+    // small UX feedback
+    chosenList.style.borderColor = "red";
+    setTimeout(() => (chosenList.style.borderColor = "#d0d7de"), 800);
+    return;
+  }
+
+  const radio = e.target;
+  const label = radio.value;
+
+  moveTimeToChosen(radio.id, label);
+});
+
+function sortChosenList() {
+  const pills = Array.from(chosenList.querySelectorAll(".selected-pill"));
+
+  // Convert to objects that contain minutes for sorting
+  const parsed = pills.map(p => {
+    const label = p.textContent.trim(); // e.g. "8:30 AM"
+    const minutes = convertLabelToMinutes(label);
+    return { element: p, minutes };
+  });
+
+  // Sort numerically
+  parsed.sort((a, b) => a.minutes - b.minutes);
+
+  // Re-append in sorted order
+  parsed.forEach(item => chosenList.appendChild(item.element));
+}
+
+// Convert "8:30 AM" → 510
+function convertLabelToMinutes(label) {
+  const [time, ampm] = label.split(" ");
+  let [hour, minute] = time.split(":").map(Number);
+
+  if (ampm === "PM" && hour !== 12) hour += 12;
+  if (ampm === "AM" && hour === 12) hour = 0;
+
+  return hour * 60 + minute;
+}
+
+
+function moveTimeToChosen(id, label) {
+  const slot = document.getElementById(id)?.parentElement;
+  if (slot) slot.remove();
+
+  const div = document.createElement("div");
+  div.className = "selected-pill";
+  div.dataset.id = id;
+  div.textContent = label;
+
+  chosenList.appendChild(div);
+  sortChosenList();
+  saveChosenTimes();   
+}
+
+
+function saveChosenTimes() {
+  const labels = Array.from(
+    chosenList.querySelectorAll(".selected-pill")
+  ).map(p => p.textContent.trim());
+
+  localStorage.setItem("chosenTimes", JSON.stringify(labels));
+}
+
+function restoreChosenTimes() {
+  const saved = JSON.parse(localStorage.getItem("chosenTimes") || "[]");
+
+  if (!saved.length) return;
+
+  saved.forEach(label => {
+    // Find the matching left slot
+    const radio = Array.from(
+      timeSelection.querySelectorAll('input[name="time"]')
+    ).find(r => r.value === label);
+
+    if (radio) {
+      // move to chosen list
+      moveTimeToChosen(radio.id, label);
+    } else {
+      // custom time case
+      // custom time case → always use the real custom-time element
+      moveTimeToChosen("time-custom", label);
+
+      // update custom pill UI
+      customTimePill.textContent = `Custom: ${label}`;
+      customTimeRadio.value = label;
+
+          }
+  });
+
+  sortChosenList();
+}
+
+
+chosenList.addEventListener("click", e => {
+  if (!e.target.classList.contains("selected-pill")) return;
+
+  const removedLabel = e.target.textContent.trim();
+
+  // Remove from UI
+  const id = e.target.dataset.id;
+  restoreToLeft(id);
+  e.target.remove();
+
+  // Remove from localStorage immediately
+  let saved = JSON.parse(localStorage.getItem("chosenTimes") || "[]");
+  saved = saved.filter(t => t !== removedLabel);
+  localStorage.setItem("chosenTimes", JSON.stringify(saved));
+});
+
+
+// Restore deselected time to ORIGINAL index position
+function restoreToLeft(id) {
+  const index = originalOrder.get(id);
+  if (index === undefined) return;
+
+  const html = allTimes.get(id);
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = html;
+  const restoredSlot = wrapper.firstElementChild;
+
+  const currentSlots = Array.from(timeSelection.querySelectorAll(".time-slot"));
+  if (index >= currentSlots.length) {
+    timeSelection.appendChild(restoredSlot);
+  } else {
+    timeSelection.insertBefore(restoredSlot, currentSlots[index]);
+  }
+
+  const radio = restoredSlot.querySelector("input");
+  if (radio) radio.checked = false;
+  if (id === "time-custom") {
+    // Do NOT restore custom time into the left column
+    // Instead, reset the custom pill
+    customTimeRadio.checked = false;
+    customTimeRadio.value = "";
+    customTimePill.textContent = "Custom time";
+    return;
+}
+
+  saveChosenTimes();     // ★ persist
+}
+
+
+  // Cache original HTML for each time-slot
+function cacheOriginalTimes() {
+  const slots = Array.from(document.querySelectorAll(".time-slot"));
+  slots.forEach(slot => {
+    const input = slot.querySelector("input");
+    allTimes.set(input.id, slot.outerHTML);
+  });
+}
+cacheOriginalTimes();
+cacheOriginalPositions();
+restoreChosenTimes();
+
+
+
   </script>
 </body>
 
