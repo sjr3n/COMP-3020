@@ -9,66 +9,94 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
-        
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
-        .work-slider-container {
-            background: white;
-            padding: 40px;
-            margin-top: 75px;
-            border-radius: 5px;
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-            width: 600px;
-            height: 400px;
+        /* Center the questionnaire vertically-ish */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 40px 0;
         }
 
-        .work-icons {
-            position: relative;
-            width: 250px;
-            height: 300px;
-            margin: 0 auto 8px;
-            overflow: hidden;
+        .questionnaire-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* === CAROUSEL + SLIDER AREA (no inner white box) === */
+
+        /* === CAROUSEL + SLIDER AREA (no inner white box) === */
+
+        .carousel-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-top: 80px;
+        }
+
+        /* Three-image row */
+        .image-strip {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 24px; /* bigger spacing */
         }
 
-        .work-icon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        /* Base styling for all images */
+        .carousel-img {
             object-fit: contain;
-            /* show full image */
-            background-color: white;
-            /* optional — fills the empty space */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            border-radius: 10px;
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease,
+                filter 0.25s ease;
         }
 
-        .work-icon.active {
+        /* Side (previous/next) images */
+        .carousel-img.side {
+            width: 180px;      /* increased from 120px */
+            height: 180px;
+            opacity: 0.40;
+            transform: scale(0.95);
+            filter: grayscale(40%);
+        }
+
+        /* Center image (main) */
+        .carousel-img.center {
+            width: 340px;      /* increased from 200px */
+            height: 340px;
             opacity: 1;
-            transform: translateY(0);
+            transform: scale(1);
+            filter: grayscale(0%);
+        }
+
+        /* Hide side when no neighbor */
+        .carousel-img.hidden {
+            opacity: 0;
+            visibility: hidden;
         }
 
         .slider-scale {
+            width: 360px;      /* widened a bit to match new image size */
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            margin: 0 10px 8px;
+            font-size: 1rem;
         }
 
         .work-slider {
-            width: 100%;
+            width: 360px;      /* wider slider */
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+
         <header class="header">
             <a href="index.html" class="logo-link">
                 <div class="logo">Gap Filler</div>
@@ -89,10 +117,9 @@
                         <span class="theme-icon moon">🌙</span>
                     </label>
                 </div>
+
                 <div class="profile-dropdown">
-                    <button class="icon profile-icon" id="profileButton">
-                        👤
-                    </button>
+                    <button class="icon profile-icon" id="profileButton">👤</button>
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="index.html" class="dropdown-item">Logout</a>
                     </div>
@@ -101,11 +128,11 @@
         </header>
 
         <div class="breadcrumb-wrapper">
-            <div class="breadcrumb-container" id="breadcrumbs">
-            </div>
+            <div class="breadcrumb-container" id="breadcrumbs"></div>
         </div>
 
         <main class="main-content">
+
             <div class="questionnaire-container">
 
                 <div class="progress-indicator">
@@ -117,111 +144,167 @@
 
                 <h1 class="question-title">How much school work do you have?</h1>
 
-                <div class="work-slider-container">
-                    <div class="work-icons">
-                        <img src="q4Photos/1.png" class="work-icon" alt="1">
-                        <img src="q4Photos/2.png" class="work-icon" alt="2">
-                        <img src="q4Photos/3.png" class="work-icon" alt="3">
-                        <img src="q4Photos/4.png" class="work-icon" alt="4">
-                        <img src="q4Photos/5.png" class="work-icon" alt="5">
+                <!-- === CAROUSEL DIRECTLY IN THE PAGE === -->
+                <div class="carousel-area">
+                    <div class="image-strip">
+                        <!-- previous image (faded) -->
+                        <img id="workImgLeft" class="carousel-img side hidden" alt="previous workload">
+
+                        <!-- current/main image -->
+                        <img id="workImgCenter" class="carousel-img center" alt="current workload">
+
+                        <!-- next image (faded) -->
+                        <img id="workImgRight" class="carousel-img side hidden" alt="next workload">
                     </div>
+
                     <div class="slider-scale">
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                     </div>
+
                     <input type="range" min="1" max="5" value="3" class="work-slider" id="workSlider">
                 </div>
 
                 <div class="nav-buttons">
-                    <button class="btn-nav btn-previous" onclick="window.location.href='q3.html'">
-                        Previous
-                    </button>
-                    <button class="btn-nav btn-next" onclick="window.location.href='tailoredEvents.html'">
-                        Find My Events
-                    </button>
+                    <button class="btn-nav btn-previous" onclick="window.location.href='q3.html'">Previous</button>
+                    <button class="btn-nav btn-next" onclick="window.location.href='tailoredEvents.html'">Find My Events</button>
                 </div>
+
             </div>
         </main>
+
         <footer class="footer">
-            <div class="footer-note">
-                2025 Gap Filler | COMP 3020 Project Prototype (Group 9)
-            </div>
+            <div class="footer-note">2025 Gap Filler | COMP 3020 Project Prototype (Group 9)</div>
         </footer>
+
     </div>
 
     <script>
+        /* --- Profile dropdown --- */
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        profileButton.addEventListener('click', function (e) {
+        profileButton.addEventListener('click', e => {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
         });
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', e => {
             if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
             }
         });
 
-        // Dark Mode Toggle
+        /* --- Dark mode --- */
         const themeSwitch = document.getElementById('theme-switch');
-        
         const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeSwitch.checked = true;
-        }
-        else {
-            document.body.classList.remove('dark-mode');
-            themeSwitch.checked = false;
-        }
-        themeSwitch.addEventListener('change', function() {
-            if (this.checked) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-            }
+
+        document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+        themeSwitch.checked = (currentTheme === 'dark');
+
+        themeSwitch.addEventListener('change', function () {
+            const isDark = this.checked;
+            document.body.classList.toggle('dark-mode', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
 
-        const slider = document.getElementById("workSlider");
-        const icons = document.querySelectorAll(".work-icon");
+        /* --- Slider-driven carousel (3-image layout) --- */
 
-        // --- Load saved slider value on page load ---
+        const slider = document.getElementById("workSlider");
+        const imgLeft = document.getElementById("workImgLeft");
+        const imgCenter = document.getElementById("workImgCenter");
+        const imgRight = document.getElementById("workImgRight");
+
+        // Your images in order 1–5
+        const workImages = [
+            "q4Photos/1.png",
+            "q4Photos/2.png",
+            "q4Photos/3.png",
+            "q4Photos/4.png",
+            "q4Photos/5.png"
+        ];
+
+        // Load saved slider value if it exists
         const savedValue = localStorage.getItem("workSliderValue");
         if (savedValue) {
             slider.value = savedValue;
         }
 
-        function updateIcon() {
-            const value = parseInt(slider.value);
-            icons.forEach((icon, index) => {
-                icon.classList.toggle("active", index === value - 1);
-            });
+        // Track previous position to know direction (left/right)
+        let lastIndex = parseInt(slider.value, 10) - 1;
 
-            // --- Save current slider value whenever it changes ---
+
+        function renderCarouselFromSlider() {
+            const value = parseInt(slider.value, 10); // 1–5
+            const index = value - 1;                  // 0–4
+
+            // Determine slide direction
+            let direction = null;
+            if (index > lastIndex) {
+                direction = "right";  // moving towards higher work level
+            } else if (index < lastIndex) {
+                direction = "left";   // moving towards lower work level
+            }
+
+            // Update center image source/alt
+            imgCenter.src = workImages[index];
+            imgCenter.alt = `Work level ${value}`;
+
+            // Update left (previous) image
+            if (index > 0) {
+                imgLeft.src = workImages[index - 1];
+                imgLeft.alt = `Work level ${value - 1}`;
+                imgLeft.classList.remove("hidden");
+            } else {
+                imgLeft.classList.add("hidden");
+            }
+
+            // Update right (next) image
+            if (index < workImages.length - 1) {
+                imgRight.src = workImages[index + 1];
+                imgRight.alt = `Work level ${value + 1}`;
+                imgRight.classList.remove("hidden");
+            } else {
+                imgRight.classList.add("hidden");
+            }
+
+            // Remove any previous animation classes so we can re-apply them
+            imgCenter.classList.remove("slide-from-left", "slide-from-right");
+
+            // Trigger reflow so the next class add will restart the CSS animation
+            void imgCenter.offsetWidth;
+
+            // Add animation class based on direction
+            if (direction === "right") {
+                imgCenter.classList.add("slide-from-right");
+            } else if (direction === "left") {
+                imgCenter.classList.add("slide-from-left");
+            }
+
+            // Remember current index for next move
+            lastIndex = index;
+
+            // Save slider value
             localStorage.setItem("workSliderValue", value);
         }
 
-        slider.addEventListener("input", updateIcon);
-        updateIcon(); // initialize the first visible icon
 
+
+        slider.addEventListener("input", renderCarouselFromSlider);
+        window.addEventListener("load", renderCarouselFromSlider);
+        renderCarouselFromSlider();
+
+        /* --- Breadcrumbs --- */
         function renderBreadcrumbs() {
             const breadcrumbs = document.getElementById('breadcrumbs');
             if (breadcrumbs) {
                 breadcrumbs.innerHTML = `
-            <a href="index.html" class="breadcrumb-link">Home</a>
-            <span class="breadcrumb-separator">></span>
-            <span class="breadcrumb-current">Questionnaire</span>`;
+                    <a href="index.html" class="breadcrumb-link">Home</a>
+                    <span class="breadcrumb-separator">></span>
+                    <span class="breadcrumb-current">Questionnaire</span>`;
             }
         }
         renderBreadcrumbs();
     </script>
-</body>
 
+</body>
 </html>

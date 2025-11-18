@@ -810,25 +810,83 @@ body {
 }
 
 /* ===== WORK SLIDER (Q4 - How Much Work) ===== */
-.work-slider-container {
-    background: #fff59d;
-    padding: 40px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    width: 100%;
+
+/* === Q4 carousel (3 images: left/center/right) === */
+
+/* Base carousel image styling (you can adjust sizes if needed) */
+.carousel-img {
+    object-fit: contain;
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease,
+        opacity 0.3s ease;
 }
 
-.work-icons {
+/* Side images (prev/next) */
+.carousel-img.side {
+    width: 180px;
+    height: 180px;
+    opacity: 0.4;
+    transform: scale(0.95);
+    filter: grayscale(40%);
+}
+
+/* Center image (main) */
+.carousel-img.center {
+    width: 340px;
+    height: 340px;
+    opacity: 1;
+    transform: scale(1);
+    filter: grayscale(0%);
+}
+
+/* Hide when there is no neighbor */
+.carousel-img.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Sliding animations for center image */
+.carousel-img.center.slide-from-left {
+    animation: slideFromLeft 0.70s ease;
+}
+
+.carousel-img.center.slide-from-right {
+    animation: slideFromRight 0.70s ease;
+}
+
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+.slider-scale {
+    width: 360px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
-.work-icon {
-    text-align: center;
+.work-slider {
+    width: 360px;
 }
+
 
 .slider-scale {
     display: flex;
