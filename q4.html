@@ -33,11 +33,18 @@
         /* === CAROUSEL + SLIDER AREA (no inner white box) === */
 
         .carousel-area {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 14px;
-            margin-top: 80px;
+            border: 1px solid #e0e0e0;
+            width: 1025px;
+            height: 450px;
+            padding: 16px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
         }
 
         /* Three-image row */
@@ -45,12 +52,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 24px;
-            /* bigger spacing */
+            gap: 24px; /* bigger spacing */
         }
 
         /* Base styling for all images */
         .carousel-img {
+            /* Box around images */
+            border: 2px solid #d0d0d0;
+            border-radius: 12px;
+            padding: 8px;
+            background: white;
             object-fit: contain;
             transition:
                 opacity 0.25s ease,
@@ -60,9 +71,8 @@
 
         /* Side (previous/next) images */
         .carousel-img.side {
-            width: 180px;
-            /* increased from 120px */
-            height: 180px;
+            width: 145px;      /* increased from 120px */
+            height: 145px;
             opacity: 0.40;
             transform: scale(0.95);
             filter: grayscale(40%);
@@ -70,9 +80,8 @@
 
         /* Center image (main) */
         .carousel-img.center {
-            width: 340px;
-            /* increased from 200px */
-            height: 340px;
+            width: 300px;      /* increased from 200px */
+            height: 300px;
             opacity: 1;
             transform: scale(1);
             filter: grayscale(0%);
@@ -85,16 +94,34 @@
         }
 
         .slider-scale {
-            width: 360px;
-            /* widened a bit to match new image size */
+            width: 360px;      /* widened a bit to match new image size */
+            color: black !important;
             display: flex;
             justify-content: space-between;
             font-size: 1rem;
         }
 
         .work-slider {
-            width: 360px;
-            /* wider slider */
+            width: 360px;      /* wider slider */
+        }
+
+        .slider-box{
+            position: absolute;
+            bottom: 20px;         /* adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+
+            width: 400px;
+            padding: 18px;
+
+            border: 2px solid #d0d0d0;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
         }
     </style>
 </head>
@@ -162,11 +189,13 @@
                         <img id="workImgRight" class="carousel-img side hidden" alt="next workload">
                     </div>
 
-                    <div class="slider-scale">
-                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                    </div>
+                    <div class="slider-box">
+                        <div class="slider-scale">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                        </div>
 
-                    <input type="range" min="1" max="5" value="3" class="work-slider" id="workSlider">
+                        <input type="range" min="1" max="5" value="3" class="work-slider" id="workSlider">
+                    </div>
                 </div>
 
                 <div class="nav-buttons">

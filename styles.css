@@ -578,6 +578,7 @@ body {
     transform: translateX(-50%);
     display: flex;
     gap: 15px;
+    white-space: nowrap;
 }
 
 /* Circles container (top navigation). */
@@ -670,25 +671,6 @@ body {
     background: #ffb81c;
 }
 
-/* ===== Time Selector (Q1 - When Are You Free) ===== */
-.time-selection {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 16px;
-    justify-items: stretch;
-    align-content: flex-start;
-
-    /* Making it blend into the page. */
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-
-    width: 100%;
-    max-width: 650px;
-    padding: 0;
-    border-radius: 0;
-    margin: 12px 0 0;
-}
 
 /* Each time option becomes a pill-style card. */
 .time-slot {
@@ -1519,9 +1501,26 @@ body.dark-mode .progress-circle {
 }
 
 body.dark-mode .progress-circle.active {
-    background: #6b4423;
-    border-color: #FFC845;
-    color: #FFC845;
+    
+    background: #6b4423; 
+    border-color: #006eb5;
+    color: black;
+    transform: scale(1.1);
+}
+
+body.dark-mode .progress-circle.active:hover {
+    
+    background: #6b4423; 
+    border-color: #006eb5;
+    color: black;
+    transform: scale(1.1);
+} /* Prevents changing the color when hovering over an active circle */
+
+body.dark-mode .progress-circle:hover {
+    background: #FFC845;  
+    border-color: #006eb5;
+    color: black;
+    transform: scale(1.1);
 }
 
 body.dark-mode .progress-circle.completed {
@@ -1553,14 +1552,24 @@ body.dark-mode .dropdown-item:hover {
     background: #6B4423;
 }
 
+body.dark-mode .social-scale{
+    background-color:rgba(128, 128, 128, 0.603);
+    border: 1px solid #6B4423 ;
+}
+
+body.dark-mode .carousel-area{
+    background-color:rgba(128, 128, 128, 0.603);
+    border: 1px solid #6B4423;
+}
+
 body.dark-mode .questionnaire-container {
     background-color: #1a3a52;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .time-selection {
-    background-color: #2e4a5e !important;
-    border: 1px solid #6B4423 !important;
+    background-color: rgba(128, 128, 128, 0.603) ;
+    border: 1px solid #6B4423 ;
 }
 
 body.dark-mode .time-slot label {
@@ -1785,4 +1794,33 @@ body.dark-mode .event-card:hover {
 
 body.dark-mode .event-card.expanded .back-button:hover {
     background-color: #3aa6c9;
+}
+
+body.dark-mode #custom-time-pill {
+    background-color: #d0d7de;
+}
+
+body.dark-mode .time-slot label{
+    background-color: #d0d7de;
+}
+
+body.dark-mode .custom-time-slot select{
+    background-color: #d0d7de;
+}
+
+body.dark-mode .chosen-times{
+    background-color: #d0d7de;
+}
+
+body.dark-mode .chosen-time-pill{
+    background-color: #d0d7de;
+}
+
+body.dark-mode .selected-pill{
+    background: #007fd4;
+    color: black;
+}
+
+body.dark-mode .emoji-group{
+    background-color: #d0d7de;
 }
