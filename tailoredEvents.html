@@ -166,12 +166,11 @@
         // Leaflet/Map Global Variables
         let map;
         let eventMarkerLayer;
+        const lightLayerUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        const darkLayerUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+        const attribution = '&copy; OpenStreetMap, &copy; CARTO';
 
         function initLeafletMap() {
-            const lightLayerUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-            const darkLayerUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-            const attribution = '&copy; OpenStreetMap, &copy; CARTO';
-
             // Check if dark mode is currently active
             const isDarkMode = document.body.classList.contains('dark-mode');
             const initialTileUrl = isDarkMode ? darkLayerUrl : lightLayerUrl;
@@ -188,6 +187,17 @@
 
             eventMarkerLayer = L.layerGroup().addTo(map);
         }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initLeafletMap();
+            renderEventGrid(eventData);
+
+            setTimeout(() => {
+                if (map) {
+                    map.invalidateSize();
+                }
+            }, 100); 
+        });
 
         //Add pins for each event
         function addMapPins(events) {
@@ -213,6 +223,8 @@
                 }
             });
         }
+
+
 
         //Render grid of events
         function renderEventGrid(events) {
@@ -318,14 +330,6 @@
             });
         }
 
-        // Wait for the DOM to be fully loaded
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                initLeafletMap();
-                renderEventGrid(eventData);
-            }, 50);
-        });
-
         // Dark Mode Toggle and Map Tile Switching
         const themeSwitch = document.getElementById('theme-switch');
         const currentTheme = localStorage.getItem('theme') || 'light';
@@ -340,8 +344,6 @@
 
         themeSwitch.addEventListener('change', function () {
             const isDark = this.checked;
-            const lightLayerUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-            const darkLayerUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
 
             if (isDark) {
                 document.body.classList.add('dark-mode');
@@ -365,6 +367,7 @@
                     attribution: '&copy; OpenStreetMap, &copy; CARTO',
                     id: 'baseLayer'
                 }).addTo(map);
+                map.invalidateSize();
             }
         });
 
