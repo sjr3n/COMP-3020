@@ -233,8 +233,8 @@
                         <div class="event-banner">
                         <div class="event-name">${event.title}</div>
                         <div class="event-time">
-                            ${event.isButton 
-                                ? '' : new Date(event.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                            ${event.isButton
+                        ? '' : new Date(event.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
                         </div>
                     </div>`;
 
@@ -287,7 +287,11 @@
                     <p><strong>Place:</strong> ${event.place}</p>
                     <p><strong>Description:</strong>
                     <p>${event.description}</p>
-                    <button class="back-button">← Back to Events</button>
+                    <div class="expanded-actions">
+                    <button class="back-button">← Back to All Events</button> 
+                    <a href="#" onclick="return redirectToMaps('${event.title}')" class="maps-link" style="margin-left: -10px">
+                        Directions
+                    </a>
                 </div>`;
 
             //Selecting an event on the map
@@ -321,8 +325,6 @@
                 renderEventGrid(eventData);
             }, 50);
         });
-
-
 
         // Dark Mode Toggle and Map Tile Switching
         const themeSwitch = document.getElementById('theme-switch');
@@ -387,6 +389,11 @@
             <span class="breadcrumb-separator">></span>
             <span class="breadcrumb-current">${eventTitle}</span>`;
             }
+        }
+
+        function redirectToMaps(eventTitle) {
+            alert(`Redirecting to device maps application for event: ${eventTitle}`);
+            return false;
         }
     </script>
 </body>

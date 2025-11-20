@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-        
+
     <style>
         /* How tired are you feeling Q3*/
         .summary-container {
@@ -35,8 +35,10 @@
 
         .social-scale {
             display: flex;
-            justify-content: center; /* horizontally center items */
-            align-items: center;     /* vertically center items */
+            justify-content: center;
+            /* horizontally center items */
+            align-items: center;
+            /* vertically center items */
             gap: 40px;
             border: 1px solid #ddd;
             background-color: white;
@@ -44,8 +46,9 @@
             height: 400px;
             padding: 0px;
             border-radius: 5px;
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
-            margin: 0 auto; /* centers the whole box */
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            /* centers the whole box */
         }
 
         .emoji-group {
@@ -53,10 +56,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;        /* makes the border wrap around both items */
+            padding: 20px;
+            /* makes the border wrap around both items */
             border: 2px solid black;
-            border-radius: 10px;  /* optional */
-            background: white;    /* optional */
+            border-radius: 10px;
+            /* optional */
+            background: white;
+            /* optional */
         }
 
 
@@ -67,7 +73,7 @@
             padding: 10px;
         }
 
-        .emoji-btn img{
+        .emoji-btn img {
             width: 150px;
             height: auto;
             object-fit: fill;
@@ -229,7 +235,7 @@
 
         // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
-        
+
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.body.classList.add('dark-mode');
@@ -239,7 +245,7 @@
             document.body.classList.remove('dark-mode');
             themeSwitch.checked = false;
         }
-        themeSwitch.addEventListener('change', function() {
+        themeSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');

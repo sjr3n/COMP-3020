@@ -1,96 +1,99 @@
-/* ===== UofM COLOR PALETTE ===== */
+/* ===== UofM Color Palette ===== */
 /*
-Light Mode:
-Blue: #006eb5 (UofM Blue)
-Brown: #6b4423 (UofM Brown/Bison)
-Yellow: #ffb81c (UofM Gold)
-Light tan: #e8dcc8 (Light brown background)
-White: #ffffff (Content background)
+    Light Mode Colors:
+    - Blue: #006eb5 (Standard UofM Blue).
+    - Brown: #6b4423 (Bison Brown).
+    - Yellow: #ffb81c (UofM Gold).
+    - Light Tan: #e8dcc8 (Background color).
+    - White: #ffffff (Content background).
 
-Dark Mode:
-- Deep navy: #1a3a52 (darker version of UofM blue)
-- Navy blue: #0d2438
-- Blue-gray: #2e4a5e
-- Gold: #FFC845 (Actual UofM gold(?))
-- Light blue: #4db8d8 (UofM cyan, but a bit brighter for dark mode)
-- Brown: #6B4423 (UofM Brown/Bison)
-
+    Dark Mode Colors:
+    - Deep Navy: #1a3a52 (Darker UofM Blue).
+    - Navy Blue: #0d2438 (Even darker for contrast).
+    - Blue-Gray: #2e4a5e (For secondary elements).
+    - Gold: #FFC845 (Bright accent).
+    - Light Blue: #4db8d8 (Cyan-ish for visibility).
+    - Brown: #6B4423 (Bison Brown).
 */
 
-/* ===== GLOBAL RESET & BASE STYLES ===== */
+/* ===== Global Reset & Base Styles ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ===== Formatting for top left website logo (home button) ===== */
+/* Formatting for the top-left logo link. */
 .logo-link {
-    text-decoration: none; /* Removes the underline when not hovering */
+    text-decoration: none;
+    /* Removes the underline. */
     cursor: pointer;
 }
 
 body {
     font-family: "Inter", Arial, sans-serif;
     background-color: #e8dcc8;
-    /* Light tan/brown */
+    /* Light tan background. */
     min-height: 100vh;
     color: #333;
 }
 
-/* ===== MAIN CONTAINER - CSS GRID ===== */
+/* ===== Main Container ===== */
 .container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* makes the whole page fill the viewport */
 }
 
-/* Wrapper to enforce max width and centering */
+/* Wrapper to keep the homepage content centered and constrained. */
 .homepage-content-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers all child blocks (groups, divider) */
+    align-items: center;
+    /* Centers everything inside. */
     width: 100%;
-    max-width: 800px; /* Constrains the entire content block */
+    max-width: 800px;
+    /* Keeps the content from getting too wide. */
 }
 
-/* Primary Button Group (Questionnaire) */
+/* Primary button group (Questionnaire). */
 .primary-action-group {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the button/tooltip */
+    align-items: center;
     width: 100%;
     gap: 20px;
 }
 
-/* Styling for the tooltip text on the homepage */
+/* Styling for the tooltip text on the homepage. */
 .homepage-tooltip {
-    text-align: center !important; /* Forces the tooltip to center */
+    text-align: center !important;
+    /* Forces the text to center. */
     margin-bottom: 0;
     width: 100%;
 }
 
-/* Secondary Button Container (See All, Add Event, Past Events) */
+/* Secondary button container (See All, Add Event, Past Events). */
 .secondary-actions-container {
     display: grid;
-    /* Arranges the 3 buttons in a 3-column layout */
+    /* Arranges the buttons in a 3-column layout. */
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
     margin-top: -10px;
 }
 
-/* Style the horizontal divider */
+/* Horizontal divider line. */
 .section-separator {
     width: 100%;
     max-width: 500px;
-    margin: 40px auto; /* Centers and adds spacing */
+    margin: 40px auto;
+    /* Centers it and adds some space. */
     border: none;
     border-top: 2px solid #ddd;
 }
 
-/* Ensure secondary buttons are slightly smaller than the primary one */
+/* Making the secondary buttons a bit smaller than the main one. */
 .btn-secondary {
     font-size: 16px;
     padding: 15px 30px;
@@ -98,16 +101,16 @@ body {
     text-align: center;
 }
 
-/* ===== HEADER - UofM Blue Background ===== */
+/* ===== Header Section ===== */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     background-color: #006eb5;
-    /* UofM Blue */
+    /* UofM Blue. */
     border-bottom: 3px solid #ffb81c;
-    /* UofM Gold accent */
+    /* Gold accent line. */
 }
 
 .header-left {
@@ -131,7 +134,8 @@ body {
 }
 
 .btn-text-link {
-    color: #006eb5; /* UofM Blue */
+    color: #006eb5;
+    /* UofM Blue. */
     font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
@@ -139,7 +143,8 @@ body {
 }
 
 .btn-text-link:hover {
-    color: #6b4423; /* UofM Brown/Bison on hover */
+    color: #6b4423;
+    /* Changes to brown on hover. */
     text-decoration: underline;
     font-size: 1.1rem;
     font-weight: bold;
@@ -152,7 +157,7 @@ body {
     color: white;
 }
 
-/* Style for the link corresponding to the current page */
+/* Styling for the active page link. */
 .header-nav-item.nav-active a {
     color: white !important;
     font-weight: 700;
@@ -161,7 +166,7 @@ body {
     border-bottom: 2px solid white;
 }
 
-/* Ensure active link doesn't change color or underline on hover */
+/* Prevents the active link from changing on hover. */
 .header-nav-item.nav-active a:hover {
     color: white !important;
     text-decoration: none !important;
@@ -191,13 +196,11 @@ body {
     font-size: 1.75rem;
     cursor: pointer;
     filter: brightness(0) invert(1);
-    /* Make emojis white on blue background */
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ===== Main Content Area ===== */
 .main-content {
     flex: 1;
-    /* allows footer to sit at bottom without overlap */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -205,10 +208,9 @@ body {
     padding: 40px 20px;
     box-sizing: border-box;
     background-color: white;
-    /* ensure white background */
 }
 
-/* ===== FOOTER ===== */
+/* ===== Footer Section ===== */
 .footer {
     width: 100%;
     background-color: #e8dcc8;
@@ -219,16 +221,16 @@ body {
     padding: 20px 40px;
     gap: 10px;
     height: 125px;
-    /* fixed footer height */
+    /* Fixed height. */
     box-sizing: border-box;
     overflow: hidden;
-    /* prevent growing beyond height */
+    /* Prevents it from growing too large. */
 }
 
 .btn-past-events {
     padding: 12px 24px;
     background: #6b4423;
-    /* Brown */
+    /* Brown. */
     color: white;
     border: none;
     border-radius: 5px;
@@ -247,7 +249,7 @@ body {
     font-style: italic;
 }
 
-/* ===== BREADCRUMBS ===== */
+/* ===== Breadcrumbs ===== */
 .breadcrumb-wrapper {
     width: 100%;
     background-color: white;
@@ -266,7 +268,8 @@ body {
 }
 
 .breadcrumb-link {
-    color: var(--uom-blue); /* UofM Blue for links */
+    color: var(--uom-blue);
+    /* Blue for links. */
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
@@ -283,12 +286,13 @@ body {
 }
 
 .breadcrumb-current {
-    color: var(--uom-brown); /* UofM Brown/Bison for the current page */
+    color: var(--uom-brown);
+    /* Brown for the current page. */
     font-size: 18px;
     font-weight: bold;
 }
 
-/* ===== THEME TOGGLE SWITCH ===== */
+/* ===== Theme Toggle Switch ===== */
 .theme-toggle {
     display: inline-block;
 }
@@ -303,19 +307,28 @@ body {
     justify-content: space-between;
     width: 70px;
     height: 35px;
+
+    /* Light mode background: UofM Gold. */
     background: #ffb81c;
-    /* UofM Gold */
     border-radius: 50px;
     padding: 5px;
     cursor: pointer;
     position: relative;
+    transition: 0.3s ease-in-out;
+    /* Smooth transition. */
 }
 
+/* Icons inside the toggle. */
 .theme-icon {
-    font-size: 1.25rem;
+    font-size: 1rem;
     z-index: 2;
+    position: relative;
+    top: -1px;
+    transition: opacity 0.3s ease;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 }
 
+/* Default icon states (Light Mode). */
 .theme-icon.sun {
     opacity: 1;
 }
@@ -326,17 +339,17 @@ body {
 
 .theme-switch-input:checked+.theme-switch-label {
     background: #6b4423;
-    /* Brown when checked */
 }
 
 .theme-switch-input:checked+.theme-switch-label .sun {
-    opacity: 0.3;
+    opacity: 1;
 }
 
 .theme-switch-input:checked+.theme-switch-label .moon {
     opacity: 1;
 }
 
+/* The sliding dot animation. */
 .theme-switch-label::before {
     content: '';
     position: absolute;
@@ -346,14 +359,17 @@ body {
     border-radius: 50%;
     top: 4px;
     left: 4px;
-    transition: transform 0.3s;
+    transition: transform 0.3s cubic-bezier(0.75, -0.55, 0.25, 1.55);
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 .theme-switch-input:checked+.theme-switch-label::before {
     transform: translateX(35px);
 }
 
-/* ===== PROFILE DROPDOWN ===== */
+/* ===== Profile Dropdown ===== */
 .profile-dropdown {
     position: relative;
     display: inline-block;
@@ -366,7 +382,7 @@ body {
     cursor: pointer;
     padding: 5px;
     filter: brightness(0) invert(1);
-    /* White on blue */
+    /* White on blue. */
 }
 
 .dropdown-menu {
@@ -399,28 +415,19 @@ body {
     color: white;
 }
 
-/* ===== MAIN CONTENT - WHITE BACKGROUND ===== */
-.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 200px);
-    background-color: #ffffff;
-    padding: 40px 20px;
-}
-
-/* ===== TOOLTIPS ===== */
+/* ===== Tooltips ===== */
 .tooltip-left {
     text-align: left;
     padding: 20px 25px;
     background: white;
-    border: 2px solid #006eb5; /* Blue border */
+    border: 2px solid #006eb5;
+    /* Blue border. */
     border-radius: 5px;
     font-size: 1rem;
     color: #333;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== Buttons ===== */
 .btn {
     padding: 20px 50px;
     border: none;
@@ -435,22 +442,23 @@ body {
     opacity: 0.9;
 }
 
-/* ===== PRIMARY BUTTON - Questionnaire (BIGGER) ===== */
+/* Primary Button - Questionnaire (Bigger). */
 .btn-primary {
-    background: #ffb81c; /* UofM Gold */
+    background: #ffb81c;
+    /* UofM Gold. */
     color: #333;
     font-size: 1.5rem;
     padding: 30px 70px;
-    border: 3px solid #006eb5; /* Blue border */
+    border: 3px solid #006eb5;
 }
 
 .btn-primary:hover {
     background: #ffc838;
 }
 
-/* ===== SECONDARY BUTTONS - See Events & Add Event ===== */
+/* Secondary Buttons - See Events & Add Event. */
 .btn-secondary {
-    background: #006eb5; /* UofM Blue */
+    background: #006eb5;
     color: white;
     font-size: 1.125rem;
     padding: 20px 50px;
@@ -460,7 +468,7 @@ body {
     background: #0081d5;
 }
 
-/* ===== TERTIARY(?) BUTTON - Past Event ===== */
+/* Past Event Button. */
 .btn-past-events {
     padding: 15px 30px;
     background: #6b4423;
@@ -476,7 +484,7 @@ body {
     background: #8b5a2b;
 }
 
-/* ===== PAST EVENTS PAGE ===== */
+/* ===== Past Events Page ===== */
 .events-list {
     background: white;
     padding: 30px;
@@ -541,49 +549,49 @@ body {
     font-style: italic;
 }
 
-/* Container for the question box */
+/* Container for the question box. */
 .questionnaire-container {
     position: relative;
     width: 1100px;
-    /* fixed width */
+    /* Fixed width. */
     height: 700px;
-    /* fixed height */
+    /* Fixed height. */
     background-color: #f8f8f8;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 80px 40px 80px;
-    /* space for content inside */
+    /* Spacing for content inside. */
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* horizontal centering */
+    /* Horizontal centering. */
     justify-content: center;
-    /* vertical centering */
+    /* Vertical centering. */
 }
 
 .question-title {
     position: absolute;
     top: 80px;
-    /* distance from top of container */
+    /* Distance from the top. */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 15px;
 }
 
-/* Circles container (top navigation) */
+/* Circles container (top navigation). */
 .progress-indicator {
     position: absolute;
     top: 20px;
-    /* distance from top of container */
+    /* Distance from the top. */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 15px;
 }
 
-/* Each circle */
+/* Individual progress circle. */
 .progress-circle {
     width: 40px;
     height: 40px;
@@ -601,14 +609,14 @@ body {
 .progress-circle.active {
     background-color: #6b4423;
     border: 3px solid #006eb5;
-    /* Blue border */
+    /* Blue border. */
     color: white;
 }
 
 .progress-circle.active:hover {
     background-color: #6b4423;
     border: 3px solid #006eb5;
-    /* Blue border */
+    /* Blue border. */
     color: white;
 }
 
@@ -618,7 +626,7 @@ body {
 }
 
 
-/* ===== NAVIGATION BUTTONS ===== */
+/* ===== Navigation Buttons ===== */
 .nav-buttons {
     position: absolute;
     bottom: 20px;
@@ -661,174 +669,176 @@ body {
 .btn-next:hover {
     background: #ffb81c;
 }
-/*===== TIME SELECTOR (Q1 - When Are You Free) =====*/
+
+/* ===== Time Selector (Q1 - When Are You Free) ===== */
 .time-selection {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 16px;
-  justify-items: stretch;
-  align-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+    justify-items: stretch;
+    align-content: flex-start;
 
-  /* Make it blend into the page */
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+    /* Making it blend into the page. */
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 
-  width: 100%;
-  max-width: 650px;
-  padding: 0;
-  border-radius: 0;
-  margin: 12px 0 0;
+    width: 100%;
+    max-width: 650px;
+    padding: 0;
+    border-radius: 0;
+    margin: 12px 0 0;
 }
 
-/* Each time option becomes a pill-style card */
+/* Each time option becomes a pill-style card. */
 .time-slot {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-/* Hide native radio, we’ll style the label instead */
+/* Hiding the native radio button so we can style the label instead. */
 .time-slot input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* Pill look for unselected times */
+/* Pill styling for unselected times. */
 .time-slot label {
-  display: block;
-  width: 100%;
-  padding: 10px 8px;
-  border-radius: 999px;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background-color: #ffffff;
-  border: 1px solid #d0d7de;
-  color: #333;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.1s ease;
+    display: block;
+    width: 100%;
+    padding: 10px 8px;
+    border-radius: 999px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    color: #333;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
 }
 
-/* Hover state */
+/* Hover state. */
 .time-slot label:hover {
-  background-color: #f0f7ff;
-  border-color: #006eb5;
-  box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
-  transform: translateY(-1px);
+    background-color: #f0f7ff;
+    border-color: #006eb5;
+    box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
+    transform: translateY(-1px);
 }
 
-/* Selected pill */
-.time-slot input[type="radio"]:checked + label {
-  background-color: #006eb5;
-  color: #ffffff;
-  border-color: #005493;
-  box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
-  transform: translateY(-1px);
+/* Selected pill styling. */
+.time-slot input[type="radio"]:checked+label {
+    background-color: #006eb5;
+    color: #ffffff;
+    border-color: #005493;
+    box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
+    transform: translateY(-1px);
 }
 
-/* Custom time row spanning full width */
+/* Custom time row spanning the full width. */
 .custom-time-slot {
-  grid-column: 1 / -1;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 12px;
-  margin-top: 4px;
+    grid-column: 1 / -1;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 12px;
+    margin-top: 4px;
 }
 
 .custom-time-slot label#custom-time-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 8px;
-  color: #444;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #444;
 }
 
 .custom-time-slot .custom-time-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .custom-time-slot select {
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid #d0d7de;
-  background-color: #ffffff;
-  font-size: 0.85rem;
-  cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #d0d7de;
+    background-color: #ffffff;
+    font-size: 0.85rem;
+    cursor: pointer;
 }
 
 .custom-time-slot select:focus {
-  outline: none;
-  border-color: #006eb5;
-  box-shadow: 0 0 0 2px rgba(0, 110, 181, 0.2);
+    outline: none;
+    border-color: #006eb5;
+    box-shadow: 0 0 0 2px rgba(0, 110, 181, 0.2);
 }
 
-/* Custom time label styled like other pills */
+/* Custom time label styled like the other pills. */
 #custom-time-pill {
-  display: block;
-  width: 100%;
-  padding: 10px 8px;
-  border-radius: 999px;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background-color: #ffffff;
-  border: 1px solid #d0d7de;
-  color: #333;
-  cursor: pointer;
-  margin-bottom: 10px;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.1s ease;
+    display: block;
+    width: 100%;
+    padding: 10px 8px;
+    border-radius: 999px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
 }
 
-/* Hover */
+/* Hover effect. */
 #custom-time-pill:hover {
-  background-color: #f0f7ff;
-  border-color: #006eb5;
-  box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
-  transform: translateY(-1px);
+    background-color: #f0f7ff;
+    border-color: #006eb5;
+    box-shadow: 0 3px 8px rgba(0, 110, 181, 0.18);
+    transform: translateY(-1px);
 }
 
-/* Selected highlight */
-#time-custom:checked + #custom-time-pill {
-  background-color: #006eb5;
-  color: #ffffff;
-  border-color: #005493;
-  box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
-  transform: translateY(-1px);
+/* Selected highlight. */
+#time-custom:checked+#custom-time-pill {
+    background-color: #006eb5;
+    color: #ffffff;
+    border-color: #005493;
+    box-shadow: 0 4px 10px rgba(0, 110, 181, 0.35);
+    transform: translateY(-1px);
 }
 
 .chosen-limit {
-  margin: 0 0 8px;
-  font-size: 0.85rem;
-  text-align: center;
-  color: #666;
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #666;
 }
 
 .no-selected {
-  text-align: center;
-  font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.5); /* ~50% opacity */
-  padding-top: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.5);
+    /* ~50% opacity. */
+    padding-top: 8px;
 }
 
 
-/* ===== WORK SLIDER (Q4 - How Much Work) ===== */
+/* ===== Work Slider (Q4 - How Much Work) ===== */
 
-/* === Q4 carousel (3 images: left/center/right) === */
+/* === Q4 Carousel (3 images: left/center/right) === */
 
-/* Base carousel image styling (you can adjust sizes if needed) */
+/* Base carousel image styling (adjustable if needed). */
 .carousel-img {
     object-fit: contain;
     transition:
@@ -837,7 +847,7 @@ body {
         opacity 0.3s ease;
 }
 
-/* Side images (prev/next) */
+/* Side images (previous/next). */
 .carousel-img.side {
     width: 180px;
     height: 180px;
@@ -846,7 +856,7 @@ body {
     filter: grayscale(40%);
 }
 
-/* Center image (main) */
+/* Center image (main). */
 .carousel-img.center {
     width: 340px;
     height: 340px;
@@ -855,13 +865,13 @@ body {
     filter: grayscale(0%);
 }
 
-/* Hide when there is no neighbor */
+/* Hiding images when there is no neighbor. */
 .carousel-img.hidden {
     opacity: 0;
     visibility: hidden;
 }
 
-/* Sliding animations for center image */
+/* Sliding animations for the center image. */
 .carousel-img.center.slide-from-left {
     animation: slideFromLeft 0.70s ease;
 }
@@ -875,6 +885,7 @@ body {
         transform: translateX(-40px) scale(0.95);
         opacity: 0;
     }
+
     to {
         transform: translateX(0) scale(1);
         opacity: 1;
@@ -886,11 +897,13 @@ body {
         transform: translateX(40px) scale(0.95);
         opacity: 0;
     }
+
     to {
         transform: translateX(0) scale(1);
         opacity: 1;
     }
 }
+
 .slider-scale {
     width: 360px;
     display: flex;
@@ -920,24 +933,22 @@ body {
     cursor: pointer;
 }
 
-/* ===== RESULTS PAGE (All Events) ===== */
+/* ===== Results Page (All Events/Tailored Events) ===== */
 .results-container {
-    max-width: 1500px;
-    min-width: 1000;
-    height: 1000px;
-    max-height: 1800;
+    max-width: 1350px; 
+    min-width: 1000px;
+    height: 85vh;
+    max-height: 950px; 
     padding: 20px 40px;
     background-color: #f8f8f8;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border: 3px solid #006eb5;
-    /* UofM Blue border for the wide rectangle */
 }
 
-/* Two-column layout for events and map */
+/* Two columns for event grid and map. */
 .results-layout {
     display: grid;
-    /* Use grid instead of flex for reliable column sizing */
     grid-template-columns: minmax(550px, 1fr) 2fr;
     gap: 30px;
     margin-top: 30px;
@@ -946,7 +957,7 @@ body {
     border-top: 1px solid #ddd;
 }
 
-/* Scrollable Partition for Event Cards */
+/* Scrollable container for event cards. */
 .event-cards-scroll {
     display: flex;
     flex-direction: column;
@@ -961,10 +972,9 @@ body {
 .event-cards-scroll.expanded-view {
     display: flex;
     justify-content: center;
-    /* Center the single expanded card */
 }
 
-/* Grid for the events */
+/* Grid for the events. */
 .event-cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(250px, 1fr));
@@ -984,27 +994,22 @@ body {
 
 .event-card:hover {
     transform: translateY(-2px);
-    /* Lift effect on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* 1. Event Image (Top Section) */
+/* Event Image  */
 .event-image {
     width: 100%;
-    /* To maintain a square ratio (1:1) */
     aspect-ratio: 1 / 1;
     display: block;
     object-fit: cover;
-    /* Ensures the image covers the area */
 }
 
-/* 2. Small White Text Banner (Bottom Section) */
 .event-banner {
     background: white;
     padding: 10px 10px;
     text-align: left;
     height: 60px;
-    /* Fixed height for a uniform "small banner" */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1027,12 +1032,10 @@ body {
     text-overflow: ellipsis;
 }
 
-
-/* Map Placeholder (Right Side) */
+/* Map Placeholder (Right Side). */
 .map-container {
     background: #f0f0f0;
     border: 2px solid #6b4423;
-    /* Brown border for contrast */
     border-radius: 5px;
     height: 100%;
 }
@@ -1049,7 +1052,7 @@ body {
     font-style: italic;
 }
 
-/* ===== EXPANDED EVENT VIEW ===== */
+/* ===== Expanded Event View ===== */
 .event-cards.expanded {
     display: flex;
     justify-content: center;
@@ -1107,32 +1110,71 @@ body {
     background: #0081d5;
 }
 
-/* ===== MODAL STYLES (Popup for Past Events) ===== */
+/* Maps App Redirect */
+.maps-link {
+    color: #006eb5;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+    transition: color 0.3s;
+}
+
+.maps-link:hover {
+    color: #6b4423;
+    text-decoration: underline;
+}
+
+body.dark-mode .maps-link {
+    color: #ffb81c;
+}
+
+body.dark-mode .maps-link:hover {
+    color: #ffc838;
+}
+
+/* Redirect Dark Mode Compliance Styles. */
+.expanded-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+.back-button {
+    flex-shrink: 0;
+}
+
+/* ===== Popup for Past Events ===== */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
-    z-index: 2000; /* Ensure it's on top of everything */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    background-color: rgba(0, 0, 0, 0.7);
     padding-top: 60px;
     animation: fadeIn 0.3s ease-in-out;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; /* 5% from the top and centered */
-    padding: 25px; /* Increased padding */
-    border: 3px solid #006eb5; /* UofM Blue border */
+    margin: 5% auto;
+    padding: 25px;
+    border: 3px solid #006eb5;
     border-radius: 10px;
     width: 80%;
     max-width: 600px;
     position: relative;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
 }
 
 /* Close button style */
@@ -1154,7 +1196,6 @@ body {
     text-decoration: none;
 }
 
-/* Event details inside the modal */
 .modal-event-image {
     width: 100%;
     height: 300px;
@@ -1174,8 +1215,6 @@ body {
     color: #333;
 }
 
-
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -1193,7 +1232,7 @@ body {
     text-align: center;
 }
 
-/* ===== BUTTON ROW - Right-aligned button + Left-aligned tooltip ===== */
+/* ===== Button Row ===== */
 .button-row {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -1201,19 +1240,19 @@ body {
     align-items: center;
 }
 
-/* ===== TOOLTIPS ===== */
+/* ===== Tooltips ===== */
 .tooltip-left {
     text-align: center;
     padding: 15px;
     background: white;
     border: 2px solid #006eb5;
-    /* Blue border */
+    /* Blue border. */
     border-radius: 5px;
     font-size: 16px;
     color: #333;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== Buttons ===== */
 .btn {
     padding: 20px 40px;
     border: none;
@@ -1222,7 +1261,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     background: #6b4423;
-    /* Brown */
+    /* Brown. */
     color: white;
 }
 
@@ -1230,25 +1269,25 @@ body {
     background: #8b5a2b;
 }
 
-/* ===== PRIMARY BUTTON - Questionnaire ===== */
+/* ===== Primary Button - Questionnaire ===== */
 .btn-primary {
     background: #ffb81c;
-    /* UofM Gold */
+    /* UofM Gold. */
     color: #333;
     font-size: 24px;
     padding: 45px 95px;
     border: 3px solid #006eb5;
-    /* Blue border */
+    /* Blue border. */
 }
 
 .btn-primary:hover {
     background: #ffc838;
 }
 
-/* ===== SECONDARY BUTTONS ===== */
+/* ===== Secondary Buttons ===== */
 .btn-secondary {
     background: #006eb5;
-    /* UofM Blue */
+    /* UofM Blue. */
     color: white;
     font-size: 18px;
     padding: 20px 40px;
@@ -1258,23 +1297,26 @@ body {
     background: #0081d5;
 }
 
-/* ===== FOOTER ===== */
+/* ===== Footer ===== */
 .footer {
     width: 100%;
     background-color: #e8dcc8;
     display: flex;
     flex-direction: column;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    overflow: hidden;
     align-items: flex-start;
     padding: 30px 40px;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
-/* ===== ADD EVENT PAGE ===== */
+/* ===== Add Event Page ===== */
 .page-title {
     text-align: center;
     font-size: 44px;
     color: #006eb5;
-    /* Blue title */
+    /* Blue title. */
     margin-bottom: 40px;
 }
 
@@ -1304,7 +1346,7 @@ body {
 .form-input:focus {
     outline: none;
     border-color: #006eb5;
-    /* Blue focus */
+    /* Blue focus. */
 }
 
 .form-textarea {
@@ -1326,7 +1368,7 @@ body {
 
 .drag-drop-area:hover {
     border-color: #ffb81c;
-    /* Gold on hover */
+    /* Gold on hover. */
     background: #fffdf5;
 }
 
@@ -1338,7 +1380,6 @@ body {
 
 .btn-cancel {
     background: #6b4423;
-    /* Brown */
     color: white;
     padding: 15px 40px;
     border: none;
@@ -1353,7 +1394,6 @@ body {
 
 .btn-submit {
     background: #ffb81c;
-    /* Gold */
     color: #333;
     padding: 15px 40px;
     border: 2px solid #006eb5;
@@ -1367,7 +1407,7 @@ body {
 }
 
 
-/* ===== RESPONSIVE ===== */
+/* ===== Responsive Styles ===== */
 @media (max-width: 768px) {
     .questionnaire-box {
         padding: 40px 30px;
@@ -1408,7 +1448,7 @@ body {
     }
 }
 
-/* ===== DARK MODE ===== */
+/* ===== Dark Mode ===== */
 body.dark-mode {
     background-color: #1a3a52;
     color: #ffffff;
@@ -1453,7 +1493,7 @@ body.dark-mode .btn-past-events {
 }
 
 body.dark-mode .btn-past-events:hover {
-    background: #8b5a2b; 
+    background: #8b5a2b;
 }
 
 body.dark-mode .btn-previous {
@@ -1479,7 +1519,7 @@ body.dark-mode .progress-circle {
 }
 
 body.dark-mode .progress-circle.active {
-    background: #6b4423; 
+    background: #6b4423;
     border-color: #FFC845;
     color: #FFC845;
 }
@@ -1580,7 +1620,7 @@ body.dark-mode .drag-drop-area {
 }
 
 body.dark-mode .events-table-container {
-    background: #1a3a52; 
+    background: #1a3a52;
     border: 2px solid #FFC845;
 }
 
@@ -1590,7 +1630,7 @@ body.dark-mode .events-table thead {
 }
 
 body.dark-mode .events-table th {
-    border-bottom: 3px solid #6B4423; 
+    border-bottom: 3px solid #6B4423;
 }
 
 body.dark-mode .events-table td {
@@ -1599,11 +1639,11 @@ body.dark-mode .events-table td {
 }
 
 body.dark-mode .events-table tbody tr:hover {
-    background-color: #2e4a5e; 
+    background-color: #2e4a5e;
 }
 
 body.dark-mode .modal-content {
-    background-color: #0d2438; 
+    background-color: #0d2438;
     border-color: #FFC845;
     color: #ffffff;
 }
@@ -1641,6 +1681,7 @@ body.dark-mode .breadcrumb-wrapper {
 body.dark-mode .breadcrumb-container {
     color: #ffffff;
 }
+
 body.dark-mode .breadcrumb-current {
     color: #FFC845;
 }
@@ -1648,16 +1689,18 @@ body.dark-mode .breadcrumb-current {
 body.dark-mode .footer-note {
     color: #aaaaaa;
 }
+
 body.dark-mode .event-card .event-name {
     color: #ffffff;
 }
+
 body.dark-mode .event-card .event-time {
     color: #aaaaaa;
 }
 
 body.dark-mode .tooltip-left {
     background: #2e4a5e;
-    color: #ffffff; 
+    color: #ffffff;
     border-color: #4db8d8;
 }
 
@@ -1667,7 +1710,7 @@ body.dark-mode .questionnaire-container {
 }
 
 body.dark-mode .question-title {
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 body.dark-mode .question-subtitle {
@@ -1678,6 +1721,7 @@ body.dark-mode .time-selection {
     background-color: #2e4a5e;
     border-color: #6B4423;
 }
+
 body.dark-mode .time-slot label {
     color: #ffffff;
 }
@@ -1687,6 +1731,7 @@ body.dark-mode .work-slider-container {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     color: #ffffff;
 }
+
 body.dark-mode .slider-scale {
     color: #ffffff;
 }
@@ -1716,7 +1761,7 @@ body.dark-mode .event-card {
 }
 
 body.dark-mode .event-card.expanded {
-    background-color: #0d2438; 
+    background-color: #0d2438;
     color: #ffffff;
     border: 1px solid #FFC845;
 }
@@ -1734,10 +1779,9 @@ body.dark-mode .event-card .event-banner {
 
 body.dark-mode .event-card:hover {
     background-color: #0d2438;
-    border: 1px solid #FFC845; 
-    box-shadow: 0 0 15px rgba(255, 200, 69, 0.5); 
+    border: 1px solid #FFC845;
+    box-shadow: 0 0 15px rgba(255, 200, 69, 0.5);
 }
-
 
 body.dark-mode .event-card.expanded .back-button:hover {
     background-color: #3aa6c9;

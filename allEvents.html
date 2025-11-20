@@ -312,7 +312,11 @@
                     <p><strong>Place:</strong> ${event.place}</p>
                     <p><strong>Description:</strong>
                     <p>${event.description}</p>
-                    <button class="back-button">← Back to Events</button>
+                    <div class="expanded-actions">
+                    <button class="back-button">← Back to All Events</button>
+                    <a href="#" onclick="return redirectToMaps('${event.title}')" class="maps-link">
+                        Directions
+                    </a>
                 </div>`;
 
             //Selecting an event on the map
@@ -434,6 +438,11 @@
                 <span class="breadcrumb-current">${eventTitle}</span>`;
                 }
             }
+        }
+
+        function redirectToMaps(eventTitle) {
+            alert(`Redirecting to device maps application for event: ${eventTitle}`);
+            return false;
         }
     </script>
 </body>

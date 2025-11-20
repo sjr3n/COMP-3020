@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-        
+
 </head>
 
 <body>
@@ -38,7 +38,7 @@
             </div>
         </header>
 
-
+        <!-- Main Content -->
         <main class="main-content">
             <div class="homepage-content-wrapper">
 
@@ -46,19 +46,22 @@
                     <div class="tooltip-left homepage-tooltip">
                         Answer a few quick questions to find events tailored to your current needs and availability.
                     </div>
-                    <button class="btn btn-primary" onclick="window.location.href='q1.html'" title="Start Questionnaire">
+                    <button class="btn btn-primary" onclick="window.location.href='q1.html'"
+                        title="Start Questionnaire">
                         START QUESTIONNAIRE
                     </button>
                 </div>
                 <hr class="section-separator">
                 <div class="secondary-actions-container">
-                    <button class="btn btn-secondary" onclick="window.location.href='allEvents.html'" title="See All Events">
+                    <button class="btn btn-secondary" onclick="window.location.href='allEvents.html'"
+                        title="See All Events">
                         See All Events
                     </button>
                     <button class="btn btn-secondary" onclick="window.location.href='addEvent.html'" title="Add Event">
                         Add Event
                     </button>
-                    <button class="btn btn-secondary" onclick="window.location.href='pastEvents.html'" title="View Past Events">
+                    <button class="btn btn-secondary" onclick="window.location.href='pastEvents.html'"
+                        title="View Past Events">
                         View Past Events
                     </button>
                 </div>
@@ -86,7 +89,7 @@
                 dropdownMenu.classList.remove('show');
             }
         });
-        
+
         // Dark Mode Toggle
         const themeSwitch = document.getElementById('theme-switch');
 
@@ -96,7 +99,7 @@
             themeSwitch.checked = true;
         }
 
-        themeSwitch.addEventListener('change', function() {
+        themeSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');
